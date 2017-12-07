@@ -100,7 +100,7 @@ class UsersManager extends Manager
 		$passwordh = password_hash($password, PASSWORD_DEFAULT);
 
 
-		$req = $this->db->prepare('INSERT INTO users(lastname, firstname, pseudo, mail, password) VALUES (?,?,?,?,?)');
+		$req = $this->db->prepare('INSERT INTO users(lastname, firstname, pseudo, email, password) VALUES (?,?,?,?,?)');
 		$newUser = $req->execute(array($nom, $prenom, $pseudo, $mail, $passwordh));
 		return $newUser ;
 	}

@@ -62,5 +62,6 @@ function insertuser($nom, $prenom, $pseudo, $mail, $password)
 	$UsersManager = new jeanforteroche\model\frontend\UsersManager();
 	$newUser = $UsersManager->newUser($nom, $prenom, $pseudo, $mail, $password);
 
-	header('index.php');
+	header('location: index.php');
+	exit();
 }
