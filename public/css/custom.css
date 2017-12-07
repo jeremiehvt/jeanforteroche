@@ -1,0 +1,113 @@
+/* Header*/
+header
+{
+	margin-bottom: 50px;
+}
+/* Fin Header*/
+
+/* body*/
+
+/* Fin body*/
+
+/* footer*/
+footer
+{
+	margin-top: 50px;
+	
+}
+
+#contact
+{
+	margin: 130px 0 130px 0;
+}
+
+.date
+{
+	color: #6d6d6d;
+}
+.headers
+{
+	color:#adadad;
+}
+
+#credit 
+	{
+		display: flex; 
+		justify-content: center;
+		padding-top: 10px;
+		
+		text-align: center;
+		background-color: white;
+	}
+
+#alaska
+{
+	background-image: url("../images/un.jpg");
+	height:530px;
+}
+
+
+
+#firstpost, #selectedpost
+{
+	background-color: #282828;
+	padding: 5px 5px 15px 20px;
+	color:white;
+
+}
+
+#selectedpostpage
+{
+	margin-top: 120px;
+}
+
+#lastposts, #otherlastpost, #allposts
+{
+	margin-right: 30px;
+	margin-top: 20px;
+	padding-left: 15px;
+	border-color: #efefef;
+}
+
+
+
+#posts, #otherposts, #all
+{
+	margin-top: 40px;
+	background-color: #efefef;
+	padding: 5px 5px 15px 20px;
+}
+#all
+{
+	margin-top: 100px;
+	margin-bottom: 40px;
+}
+
+#otherposts
+{
+
+	margin-top: 50px;
+
+}
+
+#hometitle, #homesubtitle
+{
+	color: white;
+}
+
+#adminblock
+{
+	padding: 20px 0px 20px 0px;
+	background-color: #222;
+}
+
+#admin
+{
+	color: lightgrey;
+}
+
+#inscription
+{
+	
+	margin-top: 50px;
+}
