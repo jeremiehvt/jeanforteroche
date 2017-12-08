@@ -52,6 +52,22 @@ function contact()
 	require 'view/frontend/contact.php';
 }
 
+function sendMail($sender, $sub, $msg)
+{	
+
+	$subject = htmlspecialchars($sub);
+	$message = htmlspecialchars($msg);
+	$msggo = wordwrap($message, 70, "\r\n");
+
+	$headers = 'From: '. $sender . "\r\n" .
+     'Reply-To: ' . $sender . "\r\n" .
+     'X-Mailer: PHP/' . phpversion();
+
+	mail('jeremiehvt@gmail.com', $subject, $msggo);
+
+	home();
+}
+
 function inscription()
 {
 	require 'view/frontend/inscription.php';

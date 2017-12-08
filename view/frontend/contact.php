@@ -12,43 +12,27 @@
           <div class="container">
                 <div class="raw">
                   <div class="col-md-12">
-                      <form action="" method="POST" class="form-horizontal col-md-10">
+                      <form action="index.php?sendmail" method="POST" class="form-horizontal col-md-10">
                        <h3 class="form-group">Contact</h3>
 
                         <div class="row">
                           <div class="form-group">
-                            <label for="nom" class="col-md-1">Nom</label>
+                            <label for="email" class="col-md-1">mail</label>
                             <div class="col-md-3">
-                              <input type="text" name="nom" id="nom" class="form-control">
+                              <input type="email" name="email" id="email" class="form-control" required>
                             </div>
 
-                            <label for="prenom" class="col-md-1">Prénom</label>
+                            <label for="subject" class="col-md-1">subject</label>
                             <div class="col-md-3">
-                              <input type="text" name="prenom" id="prenom" class="form-control">
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="form-group">
-                            <label for="pesudo" class="col-md-1">pseudo</label>
-                            <div class="col-md-3">
-                              <input type="text" name="pseudo" id="pseudo" class="form-control">
-                            </div>
-
-                            <label for="mail" class="col-md-1">Mail</label>
-                            <div class="col-md-3">
-                              <input type="text" name="mail" id="mail" class="form-control">
+                              <input type="text" name="subject" id="subject" class="form-control" required>
                             </div>
                           </div>
                         </div>
-
-                        
 
                         <div class="row">
                           <div class="form-group">
                             <div class="col-md-8">
-                              <textarea type="text" name="message" id="nom" class="form-control" placeholder="votre message"></textarea>
+                              <textarea type="text" name="message" id="message" class="form-control" placeholder="votre message"></textarea>
                             </div>
                           </div>
                         </div>

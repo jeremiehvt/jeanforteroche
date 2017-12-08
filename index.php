@@ -46,6 +46,19 @@ elseif (isset($_GET['page']))
 	}
 }
 
+elseif (isset($_GET['sendmail']))
+{
+	if (isset($_POST['email']) && isset($_POST['subject']) && isset($_POST['message'])) 
+	{
+		sendMail($_POST['email'], $_POST['subject'], $_POST['message']);
+	}
+
+	else
+	{
+		home();
+	}
+	
+}
 
 elseif (isset($_GET['user']))
 {
