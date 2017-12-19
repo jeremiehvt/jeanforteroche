@@ -39,14 +39,15 @@ class PostManager extends Manager
 
     public function getlastPosts()
     {
-        
+      
+
         $req = $this->db->query
         (
 			'SELECT id, post , title, DATE_FORMAT(date_post, \'%d/%m/%y à %Hh%i\') AS date_post
 			FROM posts 
 			ORDER BY id DESC LIMIT 5'
     	);
-
+    	
         return $req;
     }
 
@@ -61,7 +62,7 @@ class PostManager extends Manager
     public function getPost($Postid)
 
     {
-    	    $req = $this->db->prepare('  SELECT p.title select_title, p.post select_post, DATE_FORMAT(date_post, \'%d/%m/%y à %Hh%i\') AS date_post
+    	    $req = $this->db->prepare('  SELECT id, p.title select_title, p.post select_post, DATE_FORMAT(date_post, \'%d/%m/%y à %Hh%i\') AS date_post
     	    	FROM posts p
     	    	WHERE id = ? ');
     	    $req->execute(array($Postid));
@@ -73,21 +74,21 @@ class CommentManager extends Manager
 {
 	public function getallComments()
 	{
-		$req = $this->db->query('SELECT comment, pseudo, DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments ORDER BY date_comment DESC');
+		$req = $this->db->query('SELECT comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments ORDER BY date_comment DESC');
 		return $req;
 	}
 
 	public function getComments($Postid)
 	{
-		$req = $this->db->prepare('SELECT id_post, comment, pseudo, DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments WHERE id_post = ? ORDER BY id DESC LIMIT 0, 10');
+		$req = $this->db->prepare('SELECT id_post, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments WHERE id_post = ? ORDER BY id DESC LIMIT 0, 10');
 		$req->execute(array($Postid));
 		return $req;
 	}
 
-	public function postComment($Postid, $comment, $pseudo)
+	public function postComment($Postid, $comment)
 	{
-		$req = $this->db->prepare('INSERT INTO comments(id_post, pseudo, comment, date_comment) VALUES (?,?,?,NOW())');
-		$postcomment = $req->execute(array($Postid, $comment, $pseudo));
+		$req = $this->db->prepare('INSERT INTO comments(id_post, comment, date_comment) VALUES (?,?,NOW())');
+		$postcomment = $req->execute(array($Postid, $comment));
 		return $postcomment;
 	}
 }
@@ -104,7 +105,18 @@ class UsersManager extends Manager
 		$newUser = $req->execute(array($nom, $prenom, $pseudo, $mail, $passwordh));
 		return $newUser ;
 	}
-	
+
+	public function connectUser($pseudo, $password)
+	{
+
+	$passwordh = password_hash($password, PASSWORD_DEFAULT);
+
+	$req = $this->db->prepare('SELECT COUNT(pseudo) AS occurences FROM users WHERE pseudo = ? AND password = ?');
+	$connectUser = $req->execute(array($pseudo, $passwordh));
+	return $connectUser;
+
+	}
+
 }
 
 

@@ -5,7 +5,7 @@
 
     <div class="container-fluid">
 
-      <div class="navbar-header">
+      <div class="navbar-header" >
 
         <a class="navbar-brand" id="logo" href=""><img src="public/images/logoblanc.png"></a>                
 
@@ -17,11 +17,9 @@
           <li><a href="index.php?page=contact">Contact</a></li>
         </ul>
 
-        <form action="index.php?page=login" method="POST" class="navbar-form navbar-right inline-form">
-          <input type="text" name="pseudo" id="pseudo" class="input-sm form-control" placeholder="pseudo"> 
-          <input type="password" name="password" id="password" class="input-sm form-control" placeholder="mot de passe">
-          <button class="btn btn-primary btn-sm">log-in</button>
-          <a href="index.php?page=inscription" class="btn btn-default btn-sm">sign-in</a>
+        <form action="" method="POST" class="navbar-form navbar-right inline-form">
+          <p><?=$_SESSION['pseudo']?></p>
+          <a href="index.php?page=logout" class="btn btn-primary btn-sm">log-out</a>
         </form>
     </div>
 

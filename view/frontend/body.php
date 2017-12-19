@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -20,8 +21,19 @@
 
     <body>
       
-      <?php require_once 'header.php';?>
+      <?php 
+      if (isset($_SESSION['pseudo'])) 
+      {
+        require ('userheader.php');
+      }
+      else 
+      {
+         require('header.php');
+      } 
+      ?>
+      
       <?=$content;?>
+
       <?php require_once 'footer.php';?>
       
     </body>

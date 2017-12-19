@@ -1,83 +1,67 @@
 <?php
 
 
-require_once('model/frontend/Manager.php');
-
-function home()
+abstract class frontend
 {
-   
-    $PostManager = new jeanforteroche\model\frontend\PostManager();
-    $posts = $PostManager->getlastPost(); 
 
-    $PostManager = new jeanforteroche\model\frontend\PostManager();
-    $lastposts = $PostManager->getlastPosts(); 
+	public function __construct()
+	{
+		require_once('model/frontend/Manager.php');
+	}
 
-    $CommentManager = new jeanforteroche\model\frontend\CommentManager();
-    $allcomments = $CommentManager->getallComments();
-
-   	require_once('view/frontend/home.php');
 }
 
-function posts()
+class view extends frontend
 {
-	$PostManager = new jeanforteroche\model\frontend\PostManager();
-	$allposts = $PostManager->getPosts();
 
-	$PostManager = new jeanforteroche\model\frontend\PostManager();
-	$post = $PostManager->getPost($_GET['id']);
 
-	$CommentManager = new jeanforteroche\model\frontend\CommentManager();
-	$postComments = $CommentManager->getcomments($_GET['id']);
+	public function home()
+	{
+	   
+	    $PostManager = new jeanforteroche\model\frontend\PostManager();
+	    $posts = $PostManager->getlastPost(); 
 
-	require 'view/frontend/posts.php';
+	    $PostManager = new jeanforteroche\model\frontend\PostManager();
+	    $lastposts = $PostManager->getlastPosts(); 
+
+	    $CommentManager = new jeanforteroche\model\frontend\CommentManager();
+	    $allcomments = $CommentManager->getallComments();
+
+	   	require('view/frontend/home.php');
+	}
+
+	public function posts()
+	{
+		$PostManager = new jeanforteroche\model\frontend\PostManager();
+		$allposts = $PostManager->getPosts();
+
+		$PostManager = new jeanforteroche\model\frontend\PostManager();
+		$post = $PostManager->getPost($_GET['id']);
+
+		$CommentManager = new jeanforteroche\model\frontend\CommentManager();
+		$postComments = $CommentManager->getcomments($_GET['id']);
+
+		require('view/frontend/posts.php');
+	}
+
+	public function allposts()
+	{
+		$PostManager = new jeanforteroche\model\frontend\PostManager();
+		$allposts = $PostManager->getPosts();
+
+		require ('view/frontend/allposts.php');
+	}
 }
 
-function allposts()
+class comment extends frontend
 {
-	$PostManager = new jeanforteroche\model\frontend\PostManager();
-	$allposts = $PostManager->getPosts();
+	public function addComment()
+	{
+		$CommentManager = new jeanforteroche\model\frontend\CommentManager();
+		$postComments = $CommentManager->postComment($_GET['id'], $_POST['comment']);
 
-	require 'view/frontend/allposts.php';
+		header('location: index.php?action=post&id='.$_GET['id']);
+		exit();
+	}
 }
 
-
-function postComment($Postid, $comment, $pseudo)
-{
-	$CommentManager = new jeanforteroche\model\frontend\CommentManager();
-	$postcomment = $CommentManager->postComment($Postid, $comment, $pseudo);
-}
-
-function contact()
-{
-	require 'view/frontend/contact.php';
-}
-
-function sendMail($sender, $sub, $msg)
-{	
-
-	$subject = htmlspecialchars($sub);
-	$message = htmlspecialchars($msg);
-	$msggo = wordwrap($message, 70, "\r\n");
-
-	$headers = 'From: '. $sender . "\r\n" .
-     'Reply-To: ' . $sender . "\r\n" .
-     'X-Mailer: PHP/' . phpversion();
-
-	mail('jeremiehvt@gmail.com', $subject, $msggo);
-
-	home();
-}
-
-function inscription()
-{
-	require 'view/frontend/inscription.php';
-}
-
-function insertuser($nom, $prenom, $pseudo, $mail, $password)
-{
-	$UsersManager = new jeanforteroche\model\frontend\UsersManager();
-	$newUser = $UsersManager->newUser($nom, $prenom, $pseudo, $mail, $password);
-
-	header('location: index.php');
-	exit();
-}

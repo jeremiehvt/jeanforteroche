@@ -1,81 +1,48 @@
 <?php
 //user
+
 require ('controler/frontend/frontend.php');
 
-if (isset($_GET['id']) && $_GET['id']>0) 
+
+if (isset($_GET['action'])) 
 {
-	posts();
-}
 
-elseif (isset($_GET['commentid']) && $_GET['commentid']>0) 
-{	
-	$pseudo = 'jeremie';
 
-	if (isset($_POST['comment'])) 
-	{	
-		postcomment($_GET['commentid'], $_POST['comment'], $pseudo);
-	}
-	else
+	if ($_GET['action']==='addcomment') 
 	{
-		home();
-		
-	}
-}
-
-elseif (isset($_GET['page'])) 
-{
-	if ($_GET['page'] == 'allposts') 
-	{
-		allposts();
+		if (isset($_GET['id']) && $_GET['id'] > 0) 
+        {
+        	if (!empty($_POST['comment'])) 
+            {
+                $comment = new comment();
+				$addComment = $comment->addComment();
+            }
+        }
 	}
 
-	elseif ($_GET['page'] == 'contact') 
+	elseif ($_GET['action']==='post') 
 	{
-		contact();
-	}
-
-	elseif ($_GET['page'] == 'inscription') 
-	{
-		inscription();
-	}
-
-	else
-	{
-		home();
-		
-	}
-}
-
-elseif (isset($_GET['sendmail']))
-{
-	if (isset($_POST['email']) && isset($_POST['subject']) && isset($_POST['message'])) 
-	{
-		sendMail($_POST['email'], $_POST['subject'], $_POST['message']);
-	}
-
-	else
-	{
-		home();
+		if (isset($_GET['id']) && $_GET['id'] > 0) 
+        {
+            $view = new view();
+			$posts = $view->posts();
+        }
 	}
 	
 }
 
-elseif (isset($_GET['user']))
+elseif (isset($_GET['page'])) 
 {
-	if ($_GET['user'] == 'new') 
+	if ($_GET['page']==='allposts') 
 	{
-		insertuser($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['mail'], $_POST['password']);
-	}
-
-	else
-	{
-		home();
+		$view = new view();
+		$allposts = $view->allposts();
 	}
 }
-
+		
 else
 {
-	home();
+	$view = new view();
+	$home = $view->home();
 }
 
-//admin

@@ -30,7 +30,7 @@
                   <h2> <?=htmlspecialchars($data['newtitle'])?></h2>
                   <p><em>le <?=htmlspecialchars($data['date_post'])?> </em></p>
                   <h4><?=htmlspecialchars($data['newpost'])?></h4>
-                  <p><a class="btn btn-primary" href="index.php?id=<?=$data['id']?>">Lire ></a></p>
+                  <p><a class="btn btn-primary" href="index.php?action=post&amp;id=<?=$data['id']?>">Lire ></a></p>
                 </div>
 
               <?php }
@@ -47,7 +47,7 @@
                           <h4> <?=htmlspecialchars($data['title'])?></h4>
                           <p><em class="date">le <?=htmlspecialchars($data['date_post'])?> </em></p>
                           <h5><?=htmlspecialchars($data['post'])?></h5>
-                          <p><a class="btn btn-primary btn-sm" href="index.php?id=<?=$data['id']?>">Lire ></a></p>
+                          <p><a class="btn btn-primary btn-sm" href="index.php?action=post&amp;id=<?=$data['id']?>">Lire ></a></p>
                         </div>
                     </div>
                   
@@ -67,7 +67,7 @@
                 while ( $data = $allcomments->fetch()) 
                   { ?>
                     
-                    <li class="list-group-item"><strong><?=htmlspecialchars($data['pseudo'])?></strong><br><em class="date">le <?=htmlspecialchars($data['date_comment'])?></em><br><?=htmlspecialchars($data['comment'])?></li>
+                    <li class="list-group-item"><em class="date">le <?=htmlspecialchars($data['date_comment'])?></em><br><?=htmlspecialchars($data['comment'])?><br><a href="" class="btn btn-danger btn-xs">signaler</a></li>
                   <?php }
                 ?>
               </ul>
