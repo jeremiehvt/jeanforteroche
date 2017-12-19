@@ -31,7 +31,7 @@
                           {?>
                             <h5><em>le <?=htmlspecialchars($data['date_comment'])?></em></h5>
                             <h5><?=htmlspecialchars($data['comment'])?></h5>
-                            <p><a href="" class="btn btn-danger btn-xs">signaler</a></p>
+                            <p><a href="index.php?action=report&amp;id=<?=$data['id']?>" class="btn btn-danger btn-xs">signaler</a></p>
                           <?php }
                         
                       ?>

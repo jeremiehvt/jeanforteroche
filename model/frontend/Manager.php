@@ -74,13 +74,13 @@ class CommentManager extends Manager
 {
 	public function getallComments()
 	{
-		$req = $this->db->query('SELECT comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments ORDER BY date_comment DESC');
+		$req = $this->db->query('SELECT id, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments ORDER BY date_comment DESC');
 		return $req;
 	}
 
 	public function getComments($Postid)
 	{
-		$req = $this->db->prepare('SELECT id_post, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments WHERE id_post = ? ORDER BY id DESC LIMIT 0, 10');
+		$req = $this->db->prepare('SELECT id, id_post, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments WHERE id_post = ? ORDER BY id DESC LIMIT 0, 10');
 		$req->execute(array($Postid));
 		return $req;
 	}
@@ -90,6 +90,13 @@ class CommentManager extends Manager
 		$req = $this->db->prepare('INSERT INTO comments(id_post, comment, date_comment) VALUES (?,?,NOW())');
 		$postcomment = $req->execute(array($Postid, $comment));
 		return $postcomment;
+	}
+
+	public function reportComment($Postid)
+	{
+		$req = $this->db->prepare('INSERT INTO reportcomments(id_comment) VALUES (?)');
+		$reportcomment = $req->execute(array($Postid));
+		return $reportcomment;
 	}
 }
 

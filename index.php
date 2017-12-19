@@ -28,6 +28,15 @@ if (isset($_GET['action']))
 			$posts = $view->posts();
         }
 	}
+
+	elseif ($_GET['action']==='report') 
+	{
+		if (isset($_GET['id']) && $_GET['id'] > 0) 
+        {
+            $comment = new comment();
+			$report = $comment->report();
+        }
+	}
 	
 }
 

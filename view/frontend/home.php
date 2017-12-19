@@ -67,7 +67,7 @@
                 while ( $data = $allcomments->fetch()) 
                   { ?>
                     
-                    <li class="list-group-item"><em class="date">le <?=htmlspecialchars($data['date_comment'])?></em><br><?=htmlspecialchars($data['comment'])?><br><a href="" class="btn btn-danger btn-xs">signaler</a></li>
+                    <li class="list-group-item"><em class="date">le <?=htmlspecialchars($data['date_comment'])?></em><br><?=htmlspecialchars($data['comment'])?><br><a class="btn btn-danger btn-xs" href="index.php?action=report&amp;id=<?=$data['id']?>">signaler</a></li>
                   <?php }
                 ?>
               </ul>

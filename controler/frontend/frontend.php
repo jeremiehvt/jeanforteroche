@@ -63,5 +63,15 @@ class comment extends frontend
 		header('location: index.php?action=post&id='.$_GET['id']);
 		exit();
 	}
+
+	public function report()
+	{
+		$CommentManager = new jeanforteroche\model\frontend\CommentManager();
+		$reportComment = $CommentManager->reportComment($_GET['id']);
+
+		header('location: index.php');
+		exit();
+	}
 }
+
 
