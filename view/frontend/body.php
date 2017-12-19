@@ -21,16 +21,7 @@
 
     <body>
       
-      <?php 
-      if (isset($_SESSION['pseudo'])) 
-      {
-        require ('userheader.php');
-      }
-      else 
-      {
-         require('header.php');
-      } 
-      ?>
+      <?php require('header.php'); ?>
       
       <?=$content;?>
 
