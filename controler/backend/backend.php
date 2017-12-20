@@ -1,76 +1,80 @@
 <?php
 
 
-abstract class frontend
+abstract class backend
 {
 
 	public function __construct()
 	{
-		require_once('model/frontend/Manager.php');
+		require_once('model/backend/Manager.php');
 	}
 
 }
 
-class view extends frontend
+class view extends backend
 {
-
 
 	public function home()
 	{
 	   
-	    $PostManager = new jeanforteroche\model\frontend\PostManager();
-	    $posts = $PostManager->getlastPost(); 
+	    $PostManager = new jeanforteroche\model\backend\PostManager();
+	    $lastposts = $PostManager->getPosts();
 
-	    $PostManager = new jeanforteroche\model\frontend\PostManager();
-	    $lastposts = $PostManager->getlastPosts(); 
+	    $CommentManager = new jeanforteroche\model\backend\CommentManager();
+	    $allcomments = $CommentManager->getAllcomments();
 
-	    $CommentManager = new jeanforteroche\model\frontend\CommentManager();
-	    $allcomments = $CommentManager->getallComments();
+	    $CommentManager = new jeanforteroche\model\backend\CommentManager();
+	    $allcomments = $CommentManager->getReportcomments();
 
-	   	require('view/frontend/home.php');
+	   	require('view/backend/home.php');
 	}
 
-	public function posts()
+	public function newpost()
 	{
-		$PostManager = new jeanforteroche\model\frontend\PostManager();
-		$allposts = $PostManager->getPosts();
-
-		$PostManager = new jeanforteroche\model\frontend\PostManager();
+		
+		$PostManager = new jeanforteroche\model\backend\PostManager();
 		$post = $PostManager->getPost($_GET['id']);
 
-		$CommentManager = new jeanforteroche\model\frontend\CommentManager();
-		$postComments = $CommentManager->getcomments($_GET['id']);
-
-		require('view/frontend/posts.php');
+		require('view/frontend/newpost.php'); 
 	}
 
-	public function allposts()
+	public function editpost()
 	{
-		$PostManager = new jeanforteroche\model\frontend\PostManager();
-		$allposts = $PostManager->getPosts();
+		$PostManager = new jeanforteroche\model\backend\PostManager();
+		$post = $PostManager->getPost($_GET['id']);
 
-		require ('view/frontend/allposts.php');
+		require ('view/frontend/editpost.php');
 	}
 }
 
-class comment extends frontend
-{
-	public function addComment()
-	{
-		$CommentManager = new jeanforteroche\model\frontend\CommentManager();
-		$postComments = $CommentManager->postComment($_GET['id'], $_POST['comment']);
 
-		header('location: index.php?action=post&id='.$_GET['id']);
-		exit();
+class post extends backend
+{
+	public function add()
+	{
+		$CommentManager = new jeanforteroche\model\backend\PostManager();
+		$addPost = $CommentManager->addPosts($_GET['id'], $_POST['comment'], $_POST['title']);
 	}
 
-	public function report()
+	public function update()
 	{
-		$CommentManager = new jeanforteroche\model\frontend\CommentManager();
-		$reportComment = $CommentManager->reportComment($_GET['id']);
+		$CommentManager = new jeanforteroche\model\backend\PostManager();
+		$updatePost = $CommentManager->updatePost($_GET['id'], $_POST['comment'], $_POST['title']);
+	}
+	
+	public function delete()
+	{
+		$CommentManager = new jeanforteroche\model\backend\PostManager();
+		$deletePost = $CommentManager->deletePost($_GET['id']);
+	}
+}
 
-		header('location: index.php');
-		exit();
+class comment extends backend
+{
+	public function delete()
+	{
+		$CommentManager = new jeanforteroche\model\backend\CommentManager();
+		$deleteComment = $CommentManager->postComment($_GET['id']);
 	}
 }
 

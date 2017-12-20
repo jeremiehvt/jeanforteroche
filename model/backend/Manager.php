@@ -45,30 +45,30 @@ class PostManager extends Manager
 
     {
     	    $req = $this->db->prepare(' INSERT INTO posts(post,title,date_post) VALUES(?,?,NOW())');
-    	    $req->execute(array($Postid));
-        return $req;
+    	    $addPost = $req->execute(array($Postid));
+        return $addPost;
     }
 
     public function updatePost($title, $post, $Postid)
 
     {
     	    $req = $this->db->prepare(' UPDATE posts SET title = ?, post = ? WHERE id = ?');
-    	    $req->execute(array($title, $post, $Postid));
-        return $req;
+    	    $updatePost = $req->execute(array($title, $post, $Postid));
+        return $updatePost;
     }
 
     public function deletePost($Postid)
 
     {
     	    $req = $this->db->prepare(' DELETE FROM posts WHERE id = ?');
-    	    $req->execute(array($Postid));
-        return $req;
+    	   $deletePost = $req->execute(array($Postid));
+        return $deletePost;
     }
 }
 
 class CommentManager extends Manager
 {
-	public function getAllComments()
+	public function getAllcomments()
 	{
 		$req = $this->db->query('SELECT id, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments ORDER BY date_comment DESC');
 		return $req;
@@ -85,8 +85,8 @@ class CommentManager extends Manager
 
     {
     	    $req = $this->db->prepare(' DELETE FROM comments WHERE id = ?');
-    	    $req->execute(array($Postid));
-        return $req;
+    	    $deleteComment = $req->execute(array($Postid));
+        return $deleteComment;
     }
 }
 
