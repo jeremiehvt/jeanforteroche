@@ -88,6 +88,14 @@ class CommentManager extends Manager
     	    $deleteComment = $req->execute(array($Postid));
         return $deleteComment;
     }
+
+    public function deleteReportcomment($Postid)
+
+    {
+            $req = $this->db->prepare(' DELETE FROM reportcomments WHERE id_comment = ?');
+            $deleteReportcomment = $req->execute(array($Postid));
+        return $deleteReportcomment;
+    }
 }
 
 

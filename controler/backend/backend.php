@@ -49,33 +49,48 @@ class AdminView extends backend
 }
 
 
-class adminPost extends backend
+class AdminPost extends backend
 {
-	public function add()
+	public function addPost()
 	{
 		$CommentManager = new jeanforteroche\model\backend\PostManager();
-		$addPost = $CommentManager->addPosts($_GET['id'], $_POST['comment'], $_POST['title']);
+		$addPost = $CommentManager->addPosts((int)$_GET['id'], $_POST['comment'], $_POST['title']);
+
+		header('location: index.php?admin=home');
+		exit();
 	}
 
-	public function update()
+	public function updatePost()
 	{
 		$CommentManager = new jeanforteroche\model\backend\PostManager();
-		$updatePost = $CommentManager->updatePost($_GET['id'], $_POST['comment'], $_POST['title']);
+		$updatePost = $CommentManager->updatePost((int)$_GET['id'], $_POST['comment'], $_POST['title']);
+
+		header('location: index.php?admin=home');
+		exit();
 	}
 	
-	public function delete()
+	public function deletePost()
 	{
 		$CommentManager = new jeanforteroche\model\backend\PostManager();
-		$deletePost = $CommentManager->deletePost($_GET['id']);
+		$deletePost = $CommentManager->deletePost((int)$_GET['id']);
+		$deleteComment = $CommentManager->deleteComment((int)$_GET['id']);
+		$deleteReportcomment = $CommentManager->deleteReportcomment((int)$_GET['id']);
+
+		header('location: index.php?admin=home');
+		exit();
 	}
 }
 
-class adminComment extends backend
+class AdminComment extends backend
 {
-	public function delete()
+	public function deleteComment()
 	{
 		$CommentManager = new jeanforteroche\model\backend\CommentManager();
-		$deleteComment = $CommentManager->postComment($_GET['id']);
+		$deleteComment = $CommentManager->deleteComment((int)$_GET['id']);
+		$deleteReportcomment = $CommentManager->deleteReportcomment((int)$_GET['id']);
+
+		header('location: location: index.php?admin=home');
+		exit();
 	}
 }
 

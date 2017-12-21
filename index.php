@@ -57,6 +57,18 @@ elseif (isset($_GET['admin']))
 		$view = new AdminView();
 		$home = $view->adminHome();
 	}
+
+	elseif ($_GET['admin']==='deletepost') 
+	{
+		$admin = new AdminPost();
+		$deletepost = $admin->deletePost();
+	}
+
+	elseif ($_GET['admin']==='deletecomment')
+	{
+		$admin = new AdminComment();
+		$deletecomment = $admin->deleteComment();
+	}
 }
 		
 else
