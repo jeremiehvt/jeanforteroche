@@ -12,9 +12,9 @@
       </div>
 
         <ul class="nav navbar-nav">
-          <li class="active"><a href="index.php">Accueil</a></li>
-          <li><a href="index.php?page=allposts">Billet simple pour l'Alaska</a></li>
-          
+          <li class="active"><a href="index.php?admin=home">Admin</a></li>
+          <li><a href="index.php?admin=newpost">Ajouter un article</a></li>
+          <li><a href="index.php?admin=newpost">Déconnexion</a></li>
         </ul>
 
         

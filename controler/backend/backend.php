@@ -1,6 +1,7 @@
 <?php
 
 
+
 abstract class backend
 {
 
@@ -11,20 +12,20 @@ abstract class backend
 
 }
 
-class view extends backend
+class AdminView extends backend
 {
 
-	public function home()
+	public function adminHome()
 	{
 	   
 	    $PostManager = new jeanforteroche\model\backend\PostManager();
-	    $lastposts = $PostManager->getPosts();
+	    $posts = $PostManager->getPosts();
 
 	    $CommentManager = new jeanforteroche\model\backend\CommentManager();
 	    $allcomments = $CommentManager->getAllcomments();
 
 	    $CommentManager = new jeanforteroche\model\backend\CommentManager();
-	    $allcomments = $CommentManager->getReportcomments();
+	    $reportcomments = $CommentManager->getReportcomments();
 
 	   	require('view/backend/home.php');
 	}
@@ -48,7 +49,7 @@ class view extends backend
 }
 
 
-class post extends backend
+class adminPost extends backend
 {
 	public function add()
 	{
@@ -69,7 +70,7 @@ class post extends backend
 	}
 }
 
-class comment extends backend
+class adminComment extends backend
 {
 	public function delete()
 	{

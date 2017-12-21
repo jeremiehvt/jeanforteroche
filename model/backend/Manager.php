@@ -1,6 +1,6 @@
 <?php
 
-namespace jeanforteroche\model\frontend;
+namespace jeanforteroche\model\backend;
 
 abstract class Manager
 {	
@@ -70,14 +70,14 @@ class CommentManager extends Manager
 {
 	public function getAllcomments()
 	{
-		$req = $this->db->query('SELECT id, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments ORDER BY date_comment DESC');
+		$req = $this->db->query('SELECT id, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments ORDER BY id DESC');
 		return $req;
 	}
 
-	public function getReportcomments($Postid)
+	public function getReportcomments()
 	{
-		$req = $this->db->prepare('SELECT id, id_post, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments WHERE id_post = ? ORDER BY id DESC ');
-		$req->execute(array($Postid));
+		$req = $this->db->query('SELECT id, id_comment FROM reportcomments ORDER BY id_comment DESC ');
+	
 		return $req;
 	}
 

@@ -2,6 +2,7 @@
 //user
 
 require ('controler/frontend/frontend.php');
+require ('controler/backend/backend.php');
 
 
 if (isset($_GET['action'])) 
@@ -46,6 +47,15 @@ elseif (isset($_GET['page']))
 	{
 		$view = new view();
 		$allposts = $view->allposts();
+	}
+}
+
+elseif (isset($_GET['admin'])) 
+{
+	if ($_GET['admin']==='home') 
+	{
+		$view = new AdminView();
+		$home = $view->adminHome();
 	}
 }
 		
