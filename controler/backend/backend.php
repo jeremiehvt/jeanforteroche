@@ -32,11 +32,8 @@ class AdminView extends backend
 
 	public function newpost()
 	{
-		
-		$PostManager = new jeanforteroche\model\backend\PostManager();
-		$post = $PostManager->getPost($_GET['id']);
 
-		require('view/frontend/newpost.php'); 
+		require('view/backend/newpost.php'); 
 	}
 
 	public function editpost()
@@ -44,7 +41,7 @@ class AdminView extends backend
 		$PostManager = new jeanforteroche\model\backend\PostManager();
 		$post = $PostManager->getPost($_GET['id']);
 
-		require ('view/frontend/editpost.php');
+		require ('view/backend/editpost.php');
 	}
 }
 

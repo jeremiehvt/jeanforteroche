@@ -12,7 +12,7 @@
       <aside class="col-md-2">
 
           <h3 class="headers">Ajouter un Article</h3>
-          <a class="btn btn-success btn-lg" href="index.php?action=edit&amp;id=<?=$data['id']?>">Ajouter</a>
+          <a class="btn btn-success btn-lg" href="index.php?admin=newpost">Ajouter</a>
       </aside>
 
       <section class="col-md-6">

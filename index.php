@@ -52,22 +52,34 @@ elseif (isset($_GET['page']))
 
 elseif (isset($_GET['admin'])) 
 {
-	if ($_GET['admin']==='home') 
+	if ($_GET['admin'] === 'home') 
 	{
 		$view = new AdminView();
 		$home = $view->adminHome();
 	}
 
-	elseif ($_GET['admin']==='deletepost') 
+	elseif ($_GET['admin'] === 'deletepost') 
 	{
 		$admin = new AdminPost();
 		$deletepost = $admin->deletePost();
 	}
 
-	elseif ($_GET['admin']==='deletecomment')
+	elseif ($_GET['admin'] === 'deletecomment')
 	{
 		$admin = new AdminComment();
 		$deletecomment = $admin->deleteComment();
+	}
+
+	elseif ($_GET['admin'] === 'newpost') 
+	{
+		$view = new AdminView();
+		$new = $view->newpost();
+	}
+
+	elseif ($_GET['admin'] === 'editpost') 
+	{
+		$view = new AdminView();
+		$edit = $view->editpost();
 	}
 }
 		
