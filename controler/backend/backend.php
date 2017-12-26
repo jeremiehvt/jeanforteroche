@@ -48,10 +48,10 @@ class AdminView extends backend
 
 class AdminPost extends backend
 {
-	public function add()
+	public function addPost()
 	{
 		$PostManager = new jeanforteroche\model\backend\PostManager();
-		$addPost = $PostManager->addPost($_POST['post'], $_POST['title']);
+		$addPost = $PostManager->addPost($_POST['post'], htmlspecialchars($_POST['post']));
 
 		header('location: index.php?admin=home');
 		exit();
@@ -60,7 +60,7 @@ class AdminPost extends backend
 	public function updatePost()
 	{
 		$PostManager = new jeanforteroche\model\backend\PostManager();
-		$updatePost = $PostManager->updatePost($_POST['title'],$_POST['post'],(int)$_GET['id']);
+		$updatePost = $PostManager->updatePost($_POST['title'],htmlspecialchars($_POST['post']),(int)$_GET['id']);
 
 		header('location: index.php?admin=home');
 		exit();

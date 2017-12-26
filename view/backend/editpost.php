@@ -9,7 +9,7 @@
                   <div class="col-md-12">
                       <form action="index.php?admin=updatepost&id=<?=$_GET['id']?>" method="POST" class="form-horizontal col-md-10">
                        <h3 class="form-group">Modifier votre article</h3>
-                       <p><?=$_GET['id']?></p>
+                       
                         <div class="row">
                           <div class="form-group">
                             <label for="subject" class="col-md-1">titre</label>

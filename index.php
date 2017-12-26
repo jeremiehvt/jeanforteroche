@@ -85,7 +85,7 @@ elseif (isset($_GET['admin']))
 	elseif ($_GET['admin'] === 'addpost') 
 	{
 		$admin = new AdminPost();
-		$add = $admin->add();
+		$add = $admin->addPost();
 	}
 
 	elseif ($_GET['admin'] === 'updatepost') 

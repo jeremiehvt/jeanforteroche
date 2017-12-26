@@ -29,7 +29,7 @@
                   <h3 class="headers">À la Une</h3>
                   <h2> <?=htmlspecialchars($data['newtitle'])?></h2>
                   <p><em>le <?=htmlspecialchars($data['date_post'])?> </em></p>
-                  <h4><?=htmlspecialchars($data['newpost'])?></h4>
+                  <h4><?=htmlspecialchars_decode($data['newpost'])?></h4>
                   <p><a class="btn btn-primary" href="index.php?action=post&amp;id=<?=$data['id']?>">Lire ></a></p>
                 </div>
 
@@ -46,7 +46,7 @@
                         <div class="thumbnail col-md-3" id="lastposts" >
                           <h4> <?=htmlspecialchars($data['title'])?></h4>
                           <p><em class="date">le <?=htmlspecialchars($data['date_post'])?> </em></p>
-                          <h5><?=htmlspecialchars($data['post'])?></h5>
+                          <h5><?=htmlspecialchars_decode($data['post'])?></h5>
                           <p><a class="btn btn-primary btn-sm" href="index.php?action=post&amp;id=<?=$data['id']?>">Lire ></a></p>
                         </div>
                     </div>

@@ -15,7 +15,7 @@
                         { ?>
                           <h2><?=htmlspecialchars($select['select_title'])?></h2>
                           <p><em>le <?=htmlspecialchars($select['date_post'])?></em></p>
-                          <h4><?=htmlspecialchars($select['select_post'])?></h4>
+                          <h4><?=htmlspecialchars_decode($select['select_post'])?></h4>
                         <?php }
                     ?>
                   </div>

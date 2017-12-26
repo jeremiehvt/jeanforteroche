@@ -27,7 +27,7 @@
                   
                   <h2> <?=htmlspecialchars($data['title'])?></h2>
                   <p><em>le <?=htmlspecialchars($data['date_post'])?> </em></p>
-                  <h4><?=htmlspecialchars($data['post'])?></h4>
+                  <h4><?=htmlspecialchars_decode($data['post'])?></h4>
                   <p><a class="btn btn-warning btn-xs" href="index.php?admin=editpost&amp;id=<?=$data['id']?>">modifier </a></p>
                   <p><a class="btn btn-danger btn-xs" href="index.php?admin=deletepost&amp;id=<?=$data['id']?>">supprimer </a></p>
                 </div>

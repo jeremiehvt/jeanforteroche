@@ -17,7 +17,7 @@
                     <div class="raw">
                         <div class="thumbnail col-md-3" id="allposts">
                           <h4><?=htmlspecialchars($data['title'])?> </h4>
-                          <h5><?=htmlspecialchars($data['post'])?></h5>
+                          <h5><?=htmlspecialchars_decode($data['post'])?></h5>
                           <p><em>le <?=htmlspecialchars($data['date_post'])?></em> </p>
                           <p><a class="btn btn-primary btn-sm" href="index.php?action=post&amp;id=<?=$data['id']?>">Lire ></a></p>
                         </div>
