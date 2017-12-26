@@ -27,7 +27,7 @@
                   
                   <h2> <?=htmlspecialchars($data['title'])?></h2>
                   <p><em>le <?=htmlspecialchars($data['date_post'])?> </em></p>
-                  <h4><?=htmlspecialchars_decode($data['post'])?></h4>
+                  <h4><?=htmlspecialchars_decode(nl2br($data['post']))?></h4>
                   <p><a class="btn btn-warning btn-xs" href="index.php?admin=editpost&amp;id=<?=$data['id']?>">modifier </a></p>
                   <p><a class="btn btn-danger btn-xs" href="index.php?admin=deletepost&amp;id=<?=$data['id']?>">supprimer </a></p>
                 </div>
@@ -46,7 +46,7 @@
                 <?php
                 while ( $data = $allcomments->fetch()) 
                   { ?>
-                    <li class="list-group-item"><strong>n°<?=htmlspecialchars($data['id'])?></strong><br><em class="date">le <?=htmlspecialchars($data['date_comment'])?></em><br><?=htmlspecialchars($data['comment'])?><br><a class="btn btn-danger btn-xs" href="index.php?admin=deletecomment&amp;id=<?=$data['id']?>">supprimer</a></li>
+                    <li class="list-group-item"><strong>n°<?=htmlspecialchars($data['id'])?></strong><br><em class="date">le <?=htmlspecialchars($data['date_comment'])?></em><br><?=htmlspecialchars(nl2br($data['comment']))?><br><a class="btn btn-danger btn-xs" href="index.php?admin=deletecomment&amp;id=<?=$data['id']?>">supprimer</a></li>
                   <?php }
                 ?>
               </ul>

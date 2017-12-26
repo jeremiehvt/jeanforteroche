@@ -15,7 +15,7 @@
                         { ?>
                           <h2><?=htmlspecialchars($select['select_title'])?></h2>
                           <p><em>le <?=htmlspecialchars($select['date_post'])?></em></p>
-                          <h4><?=htmlspecialchars_decode($select['select_post'])?></h4>
+                          <h4><?=htmlspecialchars_decode(nl2br($select['select_post']))?></h4>
                         <?php }
                     ?>
                   </div>
@@ -64,7 +64,7 @@
                     <div class="raw">
                         <div class="thumbnail col-md-3" id="otherlastpost">
                           <h4><?=htmlspecialchars($other['title'])?> </h4>
-                          <h5><?=htmlspecialchars($other['post'])?></h5>
+                          <h5><?=htmlspecialchars_decode(nl2br($other['post']))?></h5>
                           <p><em>le <?=htmlspecialchars($other['date_post'])?></em> </p>
                           <p><a class="btn btn-primary btn-sm" href="index.php?action=post&amp;id=<?=$other['id']?>">Lire ></a></p>
                         </div>
