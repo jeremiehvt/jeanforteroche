@@ -7,7 +7,7 @@
           <div class="container">
                 <div class="raw">
                   <div class="col-md-12">
-                      <form action="index.php?sendmail" method="POST" class="form-horizontal col-md-10">
+                      <form action="index.php?admin=addpost" method="POST" class="form-horizontal col-md-10">
                        <h3 class="form-group">Ajouter votre nouvel article</h3>
 
                         <div class="row">

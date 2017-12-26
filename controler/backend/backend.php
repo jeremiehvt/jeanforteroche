@@ -48,10 +48,10 @@ class AdminView extends backend
 
 class AdminPost extends backend
 {
-	public function addPost()
+	public function add()
 	{
-		$CommentManager = new jeanforteroche\model\backend\PostManager();
-		$addPost = $CommentManager->addPosts((int)$_GET['id'], $_POST['comment'], $_POST['title']);
+		$PostManager = new jeanforteroche\model\backend\PostManager();
+		$addPost = $PostManager->addPost($_POST['post'], $_POST['title']);
 
 		header('location: index.php?admin=home');
 		exit();
@@ -59,8 +59,8 @@ class AdminPost extends backend
 
 	public function updatePost()
 	{
-		$CommentManager = new jeanforteroche\model\backend\PostManager();
-		$updatePost = $CommentManager->updatePost((int)$_GET['id'], $_POST['comment'], $_POST['title']);
+		$PostManager = new jeanforteroche\model\backend\PostManager();
+		$updatePost = $PostManager->updatePost($_POST['title'],$_POST['post'],(int)$_GET['id']);
 
 		header('location: index.php?admin=home');
 		exit();
@@ -68,10 +68,8 @@ class AdminPost extends backend
 	
 	public function deletePost()
 	{
-		$CommentManager = new jeanforteroche\model\backend\PostManager();
-		$deletePost = $CommentManager->deletePost((int)$_GET['id']);
-		$deleteComment = $CommentManager->deleteComment((int)$_GET['id']);
-		$deleteReportcomment = $CommentManager->deleteReportcomment((int)$_GET['id']);
+		$PostManager = new jeanforteroche\model\backend\PostManager();
+		$deletePost = $PostManager->deletePost((int)$_GET['id']);
 
 		header('location: index.php?admin=home');
 		exit();

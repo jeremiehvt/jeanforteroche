@@ -81,6 +81,18 @@ elseif (isset($_GET['admin']))
 		$view = new AdminView();
 		$edit = $view->editpost();
 	}
+
+	elseif ($_GET['admin'] === 'addpost') 
+	{
+		$admin = new AdminPost();
+		$add = $admin->add();
+	}
+
+	elseif ($_GET['admin'] === 'updatepost') 
+	{
+		$post = new AdminPost();
+		$update = $post->updatePost();
+	}
 }
 		
 else
