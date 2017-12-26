@@ -16,6 +16,12 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+      <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=mjxbftrvqwoj0x1uy323jwu9eyababfvh542tk4s2ktxee11"></script>
+      <script type="text/javascript">
+        tinymce.init({selector: '#post',language_url : 'public/js/fr_FR.JS',branding : false, menubar : false});
+      </script>
+
+
     </head>
 
 
