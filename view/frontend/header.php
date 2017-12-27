@@ -13,7 +13,7 @@
 
         <ul class="nav navbar-nav">
           <li class="active"><a href="index.php">Accueil</a></li>
-          <li><a href="index.php?page=allposts">Billet simple pour l'Alaska</a></li>
+          <li><a href="index.php?action=allposts">Billet simple pour l'Alaska</a></li>
           
         </ul>
 

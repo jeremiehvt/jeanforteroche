@@ -38,17 +38,16 @@ if (isset($_GET['action']))
 			$report = $comment->report();
         }
 	}
-	
-}
 
-elseif (isset($_GET['page'])) 
-{
-	if ($_GET['page']==='allposts') 
+	elseif ($_GET['action']==='allposts') 
 	{
 		$view = new view();
 		$allposts = $view->allposts();
 	}
+	
 }
+
+
 
 elseif (isset($_GET['admin'])) 
 {
