@@ -66,11 +66,12 @@ class comment extends frontend
 
 	public function report()
 	{
-		$CommentManager = new jeanforteroche\model\frontend\CommentManager();
-		$reportComment = $CommentManager->reportComment($_GET['id']);
+		
+			$CommentManager = new jeanforteroche\model\frontend\CommentManager();
+			$reportComment = $CommentManager->reportComment($_GET['id']);
 
-		header('location: index.php');
-		exit();
+			header('location: index.php?');
+			exit();
 	}
 }
 

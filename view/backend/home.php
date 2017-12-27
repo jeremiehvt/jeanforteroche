@@ -60,7 +60,8 @@
                 <?php
                 while ( $data = $reportcomments->fetch())
                   { ?>
-                    <li class="list-group-item"><strong>n° <?=htmlspecialchars($data['id_comment'])?></strong></li>
+                    <li class="list-group-item"><strong>n° <?=htmlspecialchars($data['id_comment'])?></strong><a class="btn btn-danger btn-xs pull-right" href="index.php?admin=deletereport&amp;id=<?=$data['id_comment']?>">supprimer</a></li>
+
                   <?php }
                 ?>
               </ul>

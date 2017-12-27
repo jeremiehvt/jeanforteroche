@@ -69,6 +69,12 @@ elseif (isset($_GET['admin']))
 		$deletecomment = $admin->deleteComment();
 	}
 
+	elseif ($_GET['admin'] === 'deletereport')
+	{
+		$admin = new AdminComment();
+		$deletereportcomment = $admin->deleteReportcomment();
+	}
+
 	elseif ($_GET['admin'] === 'newpost') 
 	{
 		$view = new AdminView();

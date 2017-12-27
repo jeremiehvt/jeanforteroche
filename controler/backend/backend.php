@@ -82,11 +82,20 @@ class AdminComment extends backend
 	{
 		$CommentManager = new jeanforteroche\model\backend\CommentManager();
 		$deleteComment = $CommentManager->deleteComment((int)$_GET['id']);
-		$deleteReportcomment = $CommentManager->deleteReportcomment((int)$_GET['id']);
+		
 
 		header('location: location: index.php?admin=home');
 		exit();
 	}
+
+	public function deleteReportcomment()
+	{
+		$CommentManager = new jeanforteroche\model\backend\CommentManager();
+		$deleteReportcomment = $CommentManager->deleteReportcomment((int)$_GET['id']);
+		header('location: location: index.php?admin=home');
+		exit();
+	}
+
 }
 
 
