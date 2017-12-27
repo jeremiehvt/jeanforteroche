@@ -14,7 +14,7 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="index.php?admin=home">Admin</a></li>
           <li><a href="index.php?admin=newpost">Ajouter un article</a></li>
-          <li><a href="index.php?admin=newpost">Déconnexion</a></li>
+          <li><a href="index.php?">Déconnexion</a></li>
         </ul>
 
         
