@@ -7,7 +7,7 @@
 
       <div class="navbar-header">
 
-        <a class="navbar-brand" id="logo" href=""><img src="public/images/logoblanc.png"></a>                
+        <a class="navbar-brand" id="logo" href="index.php"><img src="public/images/logoblanc.png"></a>                
 
       </div>
 

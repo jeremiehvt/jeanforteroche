@@ -9,7 +9,7 @@
                   <div class="col-md-2">
                     <h4 id="admin">Administration</h4>
                       <ul class="list-unstyled">
-                        <li><a class="btn btn-default btn-sm" href="index.php?admin=home">Connexion</a></li>
+                        <li><a class="btn btn-default btn-sm" href="index.php?action=connexion">Connexion</a></li>
                       </ul>
                   </div>
                 </div>

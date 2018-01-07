@@ -101,3 +101,29 @@ class CommentManager extends Manager
 }
 
 
+class UsersManager extends Manager
+{
+	public function newUser($nom, $prenom, $pseudo, $mail, $password)
+	{
+		$passwordh = password_hash($password, PASSWORD_DEFAULT);
+
+
+		$req = $this->db->prepare('INSERT INTO users(lastname, firstname, pseudo, email, password) VALUES (?,?,?,?,?)');
+		$newUser = $req->execute(array($nom, $prenom, $pseudo, $mail, $passwordh));
+		return $newUser ;
+	}
+
+	public function connectUser($pseudo, $password)
+	{
+
+	$passwordh = password_hash($password, PASSWORD_DEFAULT);
+
+	$req = $this->db->prepare('SELECT COUNT(pseudo) AS occurences FROM users WHERE pseudo = ? AND password = ?');
+	$connectUser = $req->execute(array($pseudo, $passwordh));
+	return $connectUser;
+
+	}
+
+}
+
+

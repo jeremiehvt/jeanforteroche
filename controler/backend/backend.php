@@ -43,6 +43,7 @@ class AdminView extends backend
 
 		require ('view/backend/editpost.php');
 	}
+
 }
 
 
@@ -84,7 +85,7 @@ class AdminComment extends backend
 		$deleteComment = $CommentManager->deleteComment((int)$_GET['id']);
 		
 
-		header('location: location: index.php?admin=home');
+		header('location: index.php?admin=home');
 		exit();
 	}
 
@@ -92,10 +93,33 @@ class AdminComment extends backend
 	{
 		$CommentManager = new jeanforteroche\model\backend\CommentManager();
 		$deleteReportcomment = $CommentManager->deleteReportcomment((int)$_GET['id']);
-		header('location: location: index.php?admin=home');
+		header('location: index.php?admin=home');
 		exit();
 	}
 
+}
+
+class Connexion extends backend
+{
+	public function ConnectUser()
+	{
+		$User = new jeanforteroche\model\backend\User();
+		$ConnectUser = $User->ConnectUser($_POST['pseudo'], $_POST['password']);
+
+		if ($ConnectUser === 1) 
+		{
+
+			$_SESSION['pseudo'] = $_POST['pseudo'];
+			$_SESSION['password'] = $_POST['password'];
+
+			header('location: index.php?admin=home');
+		}
+
+		else
+		{
+			header('location: index.php?');
+		}
+	}
 }
 
 

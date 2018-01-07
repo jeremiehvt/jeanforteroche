@@ -7,14 +7,14 @@
 
       <div class="navbar-header">
 
-        <a class="navbar-brand" id="logo" href=""><img src="public/images/logoblanc.png"></a>                
+        <a class="navbar-brand" id="logo" href="index.php?admin=home"><img src="public/images/logoblanc.png"></a>                
 
       </div>
 
         <ul class="nav navbar-nav">
-          <li class="active"><a href="index.php?admin=home">Admin</a></li>
+          <li class="active"><a href="index.php?admin=home"><?=$_SESSION['pseudo']?></a></li>
           <li><a href="index.php?admin=newpost">Ajouter un article</a></li>
-          <li><a href="index.php?">Déconnexion</a></li>
+          <li><a href="<?php session_destroy();?>">Déconnexion</a></li>
         </ul>
 
         

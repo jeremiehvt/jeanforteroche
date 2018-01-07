@@ -18,6 +18,8 @@
         <h3 class="headers">L'auteur</h3>
         <p>la bio de l'auteur</p>
         <p>bonjour je m'appelle jean forteroche.</p>
+   
+        
       </aside>
 
       <section class="col-md-8">

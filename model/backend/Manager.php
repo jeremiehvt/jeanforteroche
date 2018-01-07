@@ -115,4 +115,19 @@ class AdminManager extends Manager
 
 }
 
+class User extends Manager
+{
+    
+   public function connectUser($pseudo, $password)
+    {
+
+    $passwordh = password_hash($password, PASSWORD_DEFAULT);
+
+    $req = $this->db->prepare('SELECT COUNT(*) AS occurences FROM users WHERE pseudo = ? AND password = ?');
+    $connectUser = $req->execute(array($pseudo, $passwordh));
+    return $connectUser;
+
+    }
+}
+
 

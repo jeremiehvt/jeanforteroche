@@ -51,6 +51,11 @@ class view extends frontend
 
 		require ('view/frontend/allposts.php');
 	}
+
+	public function connexion()
+	{
+		require ('view/frontend/connexion.php');
+	}
 }
 
 class comment extends frontend

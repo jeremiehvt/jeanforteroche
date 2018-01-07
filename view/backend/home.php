@@ -16,7 +16,7 @@
       </aside>
 
       <section class="col-md-6">
-        <div class="raw">
+        <div class="raw"><?= 'SID';?>
           <h3 class="headers">Tous les Articles</h3>
 
             <?php
@@ -41,6 +41,9 @@
       <aside class="col-md-2">
         
           <h3 class="headers">commentaires</h3>
+
+          
+
             
               <ul class="list-group">
                 <?php
