@@ -118,7 +118,7 @@ class AdminManager extends Manager
 class User extends Manager
 {
     
-   public function connectUser($pseudo, $password)
+   public function ConnectUser($pseudo, $password)
     {
 
     $passwordh = password_hash($password, PASSWORD_DEFAULT);

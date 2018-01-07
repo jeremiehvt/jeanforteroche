@@ -16,7 +16,7 @@
       </aside>
 
       <section class="col-md-6">
-        <div class="raw"><?= 'SID';?>
+        <div class="raw">
           <h3 class="headers">Tous les Articles</h3>
 
             <?php

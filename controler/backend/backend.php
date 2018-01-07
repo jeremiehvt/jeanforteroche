@@ -106,18 +106,16 @@ class Connexion extends backend
 		$User = new jeanforteroche\model\backend\User();
 		$ConnectUser = $User->ConnectUser($_POST['pseudo'], $_POST['password']);
 
-		if ($ConnectUser === 1) 
+		if ($ConnectUser == 1)
 		{
-
-			$_SESSION['pseudo'] = $_POST['pseudo'];
-			$_SESSION['password'] = $_POST['password'];
-
+			
+			$_SESSION['admin'] = $_POST['pseudo'];
 			header('location: index.php?admin=home');
 		}
 
 		else
-		{
-			header('location: index.php?');
+		{	
+			echo "la session ne fonctionne pas";
 		}
 	}
 }

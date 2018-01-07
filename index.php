@@ -67,8 +67,16 @@ if (isset($_GET['action']))
 
 elseif (isset($_GET['admin'])) 
 {
+	if (!isset($_SESSION['admin']))
+	{
 		
-		if ($_GET['admin'] === 'home') 
+		$view = new View();
+		$connexion = $view->connexion();
+	}
+
+	else
+	{
+		if ($_GET['admin'] === 'home')
 		{	
 			$view = new AdminView();
 			$home = $view->adminHome();
@@ -116,7 +124,7 @@ elseif (isset($_GET['admin']))
 			$post = new AdminPost();
 			$update = $post->updatePost();
 		}
-	
+	}
 }
 
 
