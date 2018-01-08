@@ -9,7 +9,7 @@
                   <div class="col-md-2">
                     <h4 id="admin">Administration</h4>
                       <ul class="list-unstyled">
-                        <li><a class="btn btn-default btn-sm" href="<?php session_destroy();?>">Déconnexion</a></li>
+                        <li><a class="btn btn-default btn-sm" href="">Déconnexion</a></li>
                       </ul>
                   </div>
                 </div>

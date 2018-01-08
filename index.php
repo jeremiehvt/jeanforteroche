@@ -2,6 +2,7 @@
 
 session_start();
 
+
 require ('controler/frontend/frontend.php');
 require ('controler/backend/backend.php');
 
@@ -65,17 +66,9 @@ if (isset($_GET['action']))
 
 
 
-elseif (isset($_GET['admin'])) 
+elseif (isset($_GET['admin']) && isset($_SESSION['user'])) 
 {
-	if (!isset($_SESSION['admin']))
-	{
-		
-		$view = new View();
-		$connexion = $view->connexion();
-	}
-
-	else
-	{
+	
 		if ($_GET['admin'] === 'home')
 		{	
 			$view = new AdminView();
@@ -124,7 +117,7 @@ elseif (isset($_GET['admin']))
 			$post = new AdminPost();
 			$update = $post->updatePost();
 		}
-	}
+	
 }
 
 

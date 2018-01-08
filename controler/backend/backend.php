@@ -109,13 +109,13 @@ class Connexion extends backend
 		if ($ConnectUser == 1)
 		{
 			
-			$_SESSION['admin'] = $_POST['pseudo'];
+			$_SESSION['user'] = $_POST['pseudo'];
 			header('location: index.php?admin=home');
 		}
 
 		else
 		{	
-			echo "la session ne fonctionne pas";
+			header('location: index.php?');
 		}
 	}
 }
