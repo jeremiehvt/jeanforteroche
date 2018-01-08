@@ -118,6 +118,13 @@ class Connexion extends backend
 			header('location: index.php?');
 		}
 	}
+
+	public function Deconnexion()
+	{
+		$_SESSION = array();
+		session_destroy();
+		header('location: index.php');
+	}
 }
 
 

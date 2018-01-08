@@ -117,6 +117,12 @@ elseif (isset($_GET['admin']) && isset($_SESSION['user']))
 			$post = new AdminPost();
 			$update = $post->updatePost();
 		}
+
+		elseif ($_GET['admin'] === 'deconnexion') 
+		{
+			$deconnexion = new Connexion();
+			$death = $deconnexion->Deconnexion();
+		}
 	
 }
 

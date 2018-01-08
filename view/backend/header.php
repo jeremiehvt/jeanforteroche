@@ -14,7 +14,7 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="index.php?admin=home"><?=$_SESSION['user']?></a></li>
           <li><a href="index.php?admin=newpost">Ajouter un article</a></li>
-          <li><a href="index.php?">Déconnexion</a></li>
+          <li><a href="index.php?admin=deconnexion">Déconnexion</a></li>
         </ul>
 
         
