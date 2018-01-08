@@ -34,11 +34,9 @@ class PostManager extends Manager
     public function getPost($Postid)
 
     {
-    	    $req = $this->db->prepare('  SELECT id, p.title select_title, p.post select_post, DATE_FORMAT(date_post, \'%d/%m/%y à %Hh%i\') AS date_post
-    	    	FROM posts p
-    	    	WHERE id = ? ');
-    	    $getPost = $req->execute(array($Postid));
-        return $getPost;
+    	    $req = $this->db->prepare('  SELECT id, p.title select_title, p.post select_post, DATE_FORMAT(date_post, \'%d/%m/%y à %Hh%i\') AS date_post FROM posts p WHERE id = ? ');
+    	    $req->execute(array($Postid));
+        return $req;
     }
 
     public function addPost($post,$title)
