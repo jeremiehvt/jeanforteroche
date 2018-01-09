@@ -62,9 +62,9 @@
                 { ?>
                   
                     <div class="raw">
-                        <div class="thumbnail col-md-3" id="otherlastpost">
+                        <div class="thumbnail col-md-5" id="otherlastpost">
                           <h4><?=htmlspecialchars($other['title'])?> </h4>
-                          <h5><?=htmlspecialchars_decode(nl2br($other['post']))?></h5>
+                          <h5 id="otherparagraphe"><?=htmlspecialchars_decode(nl2br($other['post']))?></h5>
                           <p><em>le <?=htmlspecialchars($other['date_post'])?></em> </p>
                           <p><a class="btn btn-primary btn-sm" href="index.php?action=post&amp;id=<?=$other['id']?>">Lire ></a></p>
                         </div>

@@ -70,6 +70,13 @@ footer
 	
 }
 
+#lastparagraphe, #firstparagraphe, #allparagraphe, #otherparagraphe
+{
+	overflow: hidden;
+	word-break: break-word;
+	height: 200px;
+}
+
 
 
 #posts, #otherposts, #all
