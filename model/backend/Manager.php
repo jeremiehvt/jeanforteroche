@@ -74,7 +74,7 @@ class CommentManager extends Manager
 
 	public function getReportcomments()
 	{
-		$req = $this->db->query('SELECT id, id_comment FROM reportcomments ORDER BY id_comment DESC ');
+		$req = $this->db->query('SELECT DISTINCT id_comment FROM reportcomments ORDER BY id_comment DESC ');
 	
 		return $req;
 	}
