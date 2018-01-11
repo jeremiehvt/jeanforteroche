@@ -97,34 +97,32 @@ class CommentManager extends Manager
 }
 
 
-class AdminManager extends Manager
-{
-
-	public function connectAdmin($pseudo, $password)
-	{
-
-	$passwordh = password_hash($password, PASSWORD_DEFAULT);
-
-	$req = $this->db->prepare('SELECT COUNT(pseudo) AS occurences FROM users WHERE pseudo = ? AND password = ?');
-	$connectUser = $req->execute(array($pseudo, $passwordh));
-	return $connectUser;
-
-	}
-
-}
-
 class User extends Manager
 {
     
    public function ConnectUser($pseudo, $password)
     {
 
-    $passwordh = password_hash($password, PASSWORD_DEFAULT);
+    $req = $this->db->prepare('SELECT COUNT(*) AS existe FROM users WHERE pseudo = ? AND password = ? ');
+    $ConnectUser = $req->execute(array($pseudo, $password));
+    $count = $req->fetch(\PDO::FETCH_ASSOC);
+    
+    if ($count['existe'] == 1)
+        {
+            
+            $_SESSION['user'] = $_POST['pseudo'];
+            header('location: index.php?admin=home');
+            exit();
+        }
 
-    $req = $this->db->prepare('SELECT COUNT(*) AS occurences FROM users WHERE pseudo = ? AND password = ?');
-    $connectUser = $req->execute(array($pseudo, $passwordh));
-    return $connectUser;
+        elseif ($count['existe'] == 0 ) 
+        {
+            
+            echo"vos identifiants sont incorrect";
+            
+        }
 
+        
     }
 }
 

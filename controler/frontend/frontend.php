@@ -63,21 +63,46 @@ class comment extends frontend
 	public function addComment()
 	{
 		$CommentManager = new jeanforteroche\model\frontend\CommentManager();
-		$postComments = $CommentManager->postComment($_GET['id'], $_POST['comment']);
+		$postComments = $CommentManager->postComment((int)$_GET['id'], $_POST['comment']);
 
-		header('location: index.php?action=post&id='.$_GET['id']);
-		exit();
+		if ($postComments === FALSE) 
+		{
+			throw new Exception('Une erreur est survenue');
+		}
+
+		else
+		{
+			header('location: index.php?action=post&id='.(int)$_GET['id']);
+			exit();
+		}
+		
 	}
 
 	public function report()
 	{
 		
 			$CommentManager = new jeanforteroche\model\frontend\CommentManager();
-			$reportComment = $CommentManager->reportComment($_GET['id']);
+			$reportComment = $CommentManager->reportComment((int)$_GET['id']);
 
 			header('location: index.php?');
 			exit();
 	}
 }
 
+class Connexion extends frontend
+{
+	public function ConnectUser()
+	{
+		$User = new jeanforteroche\model\frontend\User();
+		$ConnectUser = $User->ConnectUser($_POST['pseudo'],$_POST['password']);
+
+	}
+
+	public function Deconnexion()
+	{
+		$_SESSION = array();
+		session_destroy();
+		header('location: index.php');
+	}
+}
 

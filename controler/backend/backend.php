@@ -9,7 +9,6 @@ abstract class backend
 	{
 		require_once('model/backend/Manager.php');
 	}
-
 }
 
 class AdminView extends backend
@@ -54,8 +53,17 @@ class AdminPost extends backend
 		$PostManager = new jeanforteroche\model\backend\PostManager();
 		$addPost = $PostManager->addPost($_POST['post'], $_POST['title']);
 
-		header('location: index.php?admin=home');
-		exit();
+		if ($addPost === FALSE) 
+		{
+			throw new Exception('Une erreur est survenue');
+		}
+
+		else
+		{
+			header('location: index.php?admin=home');
+			exit();
+		}
+		
 	}
 
 	public function updatePost()
@@ -63,8 +71,16 @@ class AdminPost extends backend
 		$PostManager = new jeanforteroche\model\backend\PostManager();
 		$updatePost = $PostManager->updatePost($_POST['title'],$_POST['post'],(int)$_GET['id']);
 
-		header('location: index.php?admin=home');
-		exit();
+		if ($updatePost === FALSE) 
+		{
+			throw new Exception('Une erreur est survenue');
+		}
+		else
+		{
+			header('location: index.php?admin=home');
+			exit();
+		}
+		
 	}
 	
 	public function deletePost()
@@ -99,32 +115,6 @@ class AdminComment extends backend
 
 }
 
-class Connexion extends backend
-{
-	public function ConnectUser()
-	{
-		$User = new jeanforteroche\model\backend\User();
-		$ConnectUser = $User->ConnectUser($_POST['pseudo'], $_POST['password']);
 
-		if ($ConnectUser == 1)
-		{
-			
-			$_SESSION['user'] = $_POST['pseudo'];
-			header('location: index.php?admin=home');
-		}
-
-		else
-		{	
-			header('location: index.php?');
-		}
-	}
-
-	public function Deconnexion()
-	{
-		$_SESSION = array();
-		session_destroy();
-		header('location: index.php');
-	}
-}
 
 

@@ -101,29 +101,32 @@ class CommentManager extends Manager
 }
 
 
-class UsersManager extends Manager
+class User extends Manager
 {
-	public function newUser($nom, $prenom, $pseudo, $mail, $password)
-	{
-		$passwordh = password_hash($password, PASSWORD_DEFAULT);
+    
+   public function ConnectUser($pseudo, $password)
+    {
 
+    $req = $this->db->prepare('SELECT COUNT(*) AS existe FROM users WHERE pseudo = ? AND password = ? ');
+    $ConnectUser = $req->execute(array($pseudo, $password));
+    $count = $req->fetch(\PDO::FETCH_ASSOC);
+    
+    if ($count['existe'] == 1)
+        {
+            
+            $_SESSION['user'] = $_POST['pseudo'];
+            header('location: index.php?admin=home');
+            exit();
+        }
 
-		$req = $this->db->prepare('INSERT INTO users(lastname, firstname, pseudo, email, password) VALUES (?,?,?,?,?)');
-		$newUser = $req->execute(array($nom, $prenom, $pseudo, $mail, $passwordh));
-		return $newUser ;
-	}
-
-	public function connectUser($pseudo, $password)
-	{
-
-	$passwordh = password_hash($password, PASSWORD_DEFAULT);
-
-	$req = $this->db->prepare('SELECT COUNT(pseudo) AS occurences FROM users WHERE pseudo = ? AND password = ?');
-	$connectUser = $req->execute(array($pseudo, $passwordh));
-	return $connectUser;
-
-	}
-
+        elseif ($count['existe'] == 0 )
+        {
+            
+            header('location: index.php?action=connexion');
+            
+        }
+        
+    }
 }
 
 

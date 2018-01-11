@@ -6,132 +6,165 @@ session_start();
 require ('controler/frontend/frontend.php');
 require ('controler/backend/backend.php');
 
-
-if (isset($_GET['action'])) 
+try
 {
-
-
-	if ($_GET['action']==='addcomment') 
+	if (!empty($_GET['action']))
 	{
-		if (isset($_GET['id']) && $_GET['id'] > 0) 
-        {
-        	if (!empty($_POST['comment'])) 
-            {
-                $comment = new comment();
-				$addComment = $comment->addComment();
-            }
-        }
+
+
+		if ($_GET['action']==='addcomment') 
+		{
+			if (!empty($_GET['id']) && $_GET['id'] > 0) 
+	        {
+	        	$comment = new comment();
+				$addcomment = $comment->addComment();
+	        }
+
+	        elseif (empty($_GET['id']) OR !is_int($_GET['id']) OR $_GET['id'] === 0) 
+	        {
+	        	throw new Exception('Une erreur est survenue');
+	        }
+		}
+
+		elseif ($_GET['action']==='post') 
+		{
+			if (!empty($_GET['id']) && $_GET['id'] > 0) 
+	        {
+	            $view = new view();
+				$posts = $view->posts();
+	        }
+
+	        elseif (empty($_GET['id']) OR !is_int($_GET['id']) OR $_GET['id'] === 0) 
+	        {
+	        	throw new Exception('Une erreur est survenue');
+	        }
+		}
+
+		elseif ($_GET['action']==='report') 
+		{
+			if (!empty($_GET['id']) && $_GET['id'] > 0) 
+	        {
+	            $comment = new comment();
+				$report = $comment->report();
+	        }
+
+	        elseif (empty($_GET['id']) OR !is_int($_GET['id']) OR $_GET['id'] === 0) 
+	        {
+	        	throw new Exception('Une erreur est survenue');
+	        }
+		}
+
+		elseif ($_GET['action']==='allposts') 
+		{
+			$view = new view();
+			$allposts = $view->allposts();
+		}
+
+		elseif ($_GET['action'] === 'connexion') 
+		{
+			$view = new View();
+			$connexion = $view->connexion();
+		}
+
+
+		elseif ($_GET['action'] === 'connectuser') 
+		{
+			if (!empty($_POST['pseudo']) && !empty($_POST['password'])) 
+			{
+				$connexion = new Connexion();
+				$connect = $connexion->ConnectUser();
+			}
+
+			elseif (empty($_GET['pseudo']) OR empty($_GET['password'])) 
+			{
+				throw new Exception('Veuillez remplir tout les champs de saisie de texte');
+			}
+		}
+
+		elseif (!is_string($_GET['action'])) 
+		{
+			throw new Exception('Une erreur est survenue');
+		}
+
 	}
 
-	elseif ($_GET['action']==='post') 
+
+
+	elseif (!empty($_GET['admin']) && !empty($_SESSION['user'])) 
 	{
-		if (isset($_GET['id']) && $_GET['id'] > 0) 
-        {
-            $view = new view();
-			$posts = $view->posts();
-        }
+		
+			if ($_GET['admin'] === 'home')
+			{	
+				$view = new AdminView();
+				$home = $view->adminHome();
+			}
+
+			elseif ($_GET['admin'] === 'deletepost') 
+			{
+				$admin = new AdminPost();
+				$deletepost = $admin->deletePost();
+			}
+
+			elseif ($_GET['admin'] === 'deletecomment')
+			{
+				$admin = new AdminComment();
+				$deletecomment = $admin->deleteComment();
+			}
+
+			elseif ($_GET['admin'] === 'deletereport')
+			{
+				$admin = new AdminComment();
+				$deletereportcomment = $admin->deleteReportcomment();
+			}
+
+			elseif ($_GET['admin'] === 'newpost') 
+			{
+				$view = new AdminView();
+				$new = $view->newpost();
+			}
+
+			elseif ($_GET['admin'] === 'editpost') 
+			{
+
+				$view = new AdminView();
+				$edit = $view->editpost();
+			}
+
+			elseif ($_GET['admin'] === 'addpost') 
+			{
+				$admin = new AdminPost();
+				$add = $admin->addPost();
+			}
+
+			elseif ($_GET['admin'] === 'updatepost') 
+			{
+				$post = new AdminPost();
+				$update = $post->updatePost();
+			}
+
+			elseif ($_GET['admin'] === 'deconnexion') 
+			{
+				$deconnexion = new Connexion();
+				$death = $deconnexion->Deconnexion();
+			}
+
+			elseif (!is_string($_GET['admin'])) 
+			{
+				throw new Exception('Une erreur est survenue');
+			}
 	}
 
-	elseif ($_GET['action']==='report') 
-	{
-		if (isset($_GET['id']) && $_GET['id'] > 0) 
-        {
-            $comment = new comment();
-			$report = $comment->report();
-        }
-	}
-
-	elseif ($_GET['action']==='allposts') 
+	else
 	{
 		$view = new view();
-		$allposts = $view->allposts();
-	}
-
-	elseif ($_GET['action'] === 'connexion') 
-	{
-		$view = new View();
-		$connexion = $view->connexion();
+		$home = $view->home();
 	}
 
 
-	elseif ($_GET['action'] === 'connectuser') 
-	{
-		if (isset($_POST['pseudo']) && isset($_POST['password'])) 
-		{
-			$connexion = new Connexion();
-			$connect = $connexion->ConnectUser();
-		}
-	}
 }
 
-
-
-elseif (isset($_GET['admin']) && isset($_SESSION['user'])) 
+catch(Exception $e)
 {
-	
-		if ($_GET['admin'] === 'home')
-		{	
-			$view = new AdminView();
-			$home = $view->adminHome();
-		}
-
-		elseif ($_GET['admin'] === 'deletepost') 
-		{
-			$admin = new AdminPost();
-			$deletepost = $admin->deletePost();
-		}
-
-		elseif ($_GET['admin'] === 'deletecomment')
-		{
-			$admin = new AdminComment();
-			$deletecomment = $admin->deleteComment();
-		}
-
-		elseif ($_GET['admin'] === 'deletereport')
-		{
-			$admin = new AdminComment();
-			$deletereportcomment = $admin->deleteReportcomment();
-		}
-
-		elseif ($_GET['admin'] === 'newpost') 
-		{
-			$view = new AdminView();
-			$new = $view->newpost();
-		}
-
-		elseif ($_GET['admin'] === 'editpost') 
-		{
-
-			$view = new AdminView();
-			$edit = $view->editpost();
-		}
-
-		elseif ($_GET['admin'] === 'addpost') 
-		{
-			$admin = new AdminPost();
-			$add = $admin->addPost();
-		}
-
-		elseif ($_GET['admin'] === 'updatepost') 
-		{
-			$post = new AdminPost();
-			$update = $post->updatePost();
-		}
-
-		elseif ($_GET['admin'] === 'deconnexion') 
-		{
-			$deconnexion = new Connexion();
-			$death = $deconnexion->Deconnexion();
-		}
-	
+	$errormessage = $e->getmessage();
+	require('view/frontend/errorview.php');
 }
-
-
-
-		
-else
-{
-	$view = new view();
-	$home = $view->home();
-}
-
