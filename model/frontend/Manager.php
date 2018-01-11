@@ -2,6 +2,11 @@
 
 namespace jeanforteroche\model\frontend;
 
+
+/**
+ * frontend abstract class Manager
+ * this class conteinn only two methods to init db 
+ */
 abstract class Manager
 {	
 	protected $db;
@@ -20,9 +25,16 @@ abstract class Manager
 	}
 }
 
+/**
+ * class PostManager
+ * this class manage all interaction with db to select posts
+ */
 class PostManager extends Manager
 {
-	
+	/**
+	* 
+	* this method select the most recent post
+	*/
 	public function getlastPost()
     {
         
@@ -37,6 +49,10 @@ class PostManager extends Manager
         return $req;
     }
 
+    /**
+	* 
+	* this method select the most recent posts 
+	*/
     public function getlastPosts()
     {
       
@@ -51,6 +67,10 @@ class PostManager extends Manager
         return $req;
     }
 
+    /**
+	* 
+	* this method select all posts
+	*/
     public function getPosts()
     {
         
@@ -59,6 +79,10 @@ class PostManager extends Manager
         return $req;
     }
 
+    /**
+	* 
+	* this method select one post 
+	*/
     public function getPost($Postid)
 
     {
@@ -70,14 +94,27 @@ class PostManager extends Manager
     }
 }
 
+/**
+ * class commentManager
+ * this class manage all interaction with db to select or insert comments
+ */
 class CommentManager extends Manager
-{
+{	
+
+	/**
+	* 
+	* this method select all comments
+	*/
 	public function getallComments()
 	{
 		$req = $this->db->query('SELECT id, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments ORDER BY date_comment DESC');
 		return $req;
 	}
 
+	/**
+	* 
+	* this method select all comments from a post
+	*/
 	public function getComments($Postid)
 	{
 		$req = $this->db->prepare('SELECT id, id_post, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments WHERE id_post = ? ORDER BY id DESC LIMIT 0, 10');
@@ -85,6 +122,10 @@ class CommentManager extends Manager
 		return $req;
 	}
 
+	/**
+	* 
+	* this method insert a new comment
+	*/
 	public function postComment($Postid, $comment)
 	{
 		$req = $this->db->prepare('INSERT INTO comments(id_post, comment, date_comment) VALUES (?,?,NOW())');
@@ -92,6 +133,10 @@ class CommentManager extends Manager
 		return $postcomment;
 	}
 
+	/**
+	* 
+	* this method insert a new comment in reportcomment
+	*/
 	public function reportComment($Postid)
 	{
 		$req = $this->db->prepare('INSERT INTO reportcomments(id_comment) VALUES (?)');
@@ -100,7 +145,11 @@ class CommentManager extends Manager
 	}
 }
 
-
+/**
+* class User
+* this class verify the id's of user to connect him to admin
+*  
+*/
 class User extends Manager
 {
     

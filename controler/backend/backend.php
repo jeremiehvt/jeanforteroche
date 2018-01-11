@@ -1,7 +1,9 @@
 <?php
 
-
-
+/**
+ * backend abstract class controller
+ * first instruction, add construct method with include model manager
+ */
 abstract class backend
 {
 
@@ -11,9 +13,17 @@ abstract class backend
 	}
 }
 
+/**
+ * view class controller
+ * manages view for admin
+ */
 class AdminView extends backend
 {
 
+	/**
+	* this method manage post and comment to display on the admin homepage
+	* this require view
+	*/
 	public function adminHome()
 	{
 	   
@@ -29,12 +39,20 @@ class AdminView extends backend
 	   	require('view/backend/home.php');
 	}
 
+	/**
+	* this method display view to publish new post
+	* 
+	*/
 	public function newpost()
 	{
 
 		require('view/backend/newpost.php'); 
 	}
 
+	/**
+	* this method manage post data to display on the updatepost page
+	* this require view
+	*/
 	public function editpost()
 	{
 		$PostManager = new jeanforteroche\model\backend\PostManager();
@@ -45,9 +63,17 @@ class AdminView extends backend
 
 }
 
-
+/**
+ * adminpost class controller
+ * manages newpost for admin
+ */
 class AdminPost extends backend
-{
+{	
+	/**
+	* this method send data to the model to add newpost
+	* this method verify the return value
+	* this method redirect to adminhomepage
+	*/
 	public function addPost()
 	{
 		$PostManager = new jeanforteroche\model\backend\PostManager();
@@ -66,6 +92,11 @@ class AdminPost extends backend
 		
 	}
 
+	/**
+	* this method send data to the model to update post
+	* this method verify the return value 
+	* this method redirect to adminhomepage
+	*/
 	public function updatePost()
 	{
 		$PostManager = new jeanforteroche\model\backend\PostManager();
@@ -83,6 +114,11 @@ class AdminPost extends backend
 		
 	}
 	
+	/**
+	* this method send data to the model to delete post
+	*
+	* this method redirect to adminhomepage
+	*/
 	public function deletePost()
 	{
 		$PostManager = new jeanforteroche\model\backend\PostManager();
@@ -93,8 +129,17 @@ class AdminPost extends backend
 	}
 }
 
+/**
+ * admincomment class controller
+ * manages newcomment and reportcomment for admin
+ */
 class AdminComment extends backend
-{
+{	
+	/**
+	* this method send data to the model to delete comment
+	*
+	* this method redirect to adminhomepage
+	*/
 	public function deleteComment()
 	{
 		$CommentManager = new jeanforteroche\model\backend\CommentManager();
@@ -105,6 +150,11 @@ class AdminComment extends backend
 		exit();
 	}
 
+	/**
+	* this method send data to the model to delete reportcomment
+	*
+	* this method redirect to adminhomepage
+	*/
 	public function deleteReportcomment()
 	{
 		$CommentManager = new jeanforteroche\model\backend\CommentManager();

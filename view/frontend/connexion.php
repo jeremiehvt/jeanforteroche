@@ -1,4 +1,4 @@
-<?php $title = 'contact';?>
+<?php $title = 'connection';?>
 
 <?php ob_start();?>
 

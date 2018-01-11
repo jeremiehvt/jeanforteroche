@@ -1,5 +1,5 @@
 
-<?php $title = 'home';?>
+<?php $title = 'modification d\'un article';?>
 
 <?php ob_start();?>
 

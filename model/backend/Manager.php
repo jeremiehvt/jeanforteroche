@@ -2,6 +2,10 @@
 
 namespace jeanforteroche\model\backend;
 
+/**
+ * backend abstract class Manager
+ * this class conteinn only two methods to init db 
+ */
 abstract class Manager
 {	
 	protected $db;
@@ -20,9 +24,18 @@ abstract class Manager
 	}
 }
 
+/**
+ * class PostManager
+ * this class manage all interaction with db to select, update, insert, or delete posts
+ */
 class PostManager extends Manager
 {
-	
+
+
+    /**
+    * 
+    * this method select allpost
+    */
     public function getPosts()
     {
         
@@ -31,6 +44,10 @@ class PostManager extends Manager
         return $req;
     }
 
+    /**
+    * 
+    * this method select onepost
+    */
     public function getPost($Postid)
 
     {
@@ -39,6 +56,10 @@ class PostManager extends Manager
         return $req;
     }
 
+    /**
+    * 
+    * this method insert post
+    */
     public function addPost($post,$title)
 
     {
@@ -47,6 +68,10 @@ class PostManager extends Manager
         return $addPost;
     }
 
+    /**
+    * 
+    * this method update post
+    */
     public function updatePost($title, $post, $Postid)
 
     {
@@ -55,6 +80,10 @@ class PostManager extends Manager
         return $updatePost;
     }
 
+    /**
+    * 
+    * this method delete a post
+    */
     public function deletePost($Postid)
 
     {
@@ -64,14 +93,26 @@ class PostManager extends Manager
     }
 }
 
+/**
+ * class commentmanager
+ * this class manage all interaction with db to select, insert, or delete comments
+ */
 class CommentManager extends Manager
 {
-	public function getAllcomments()
+	/**
+    * 
+    * this method select comments
+    */
+    public function getAllcomments()
 	{
 		$req = $this->db->query('SELECT id, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments ORDER BY id DESC');
 		return $req;
 	}
 
+    /**
+    * 
+    * this method select reportcomments
+    */
 	public function getReportcomments()
 	{
 		$req = $this->db->query('SELECT DISTINCT id_comment FROM reportcomments ORDER BY id_comment DESC ');
@@ -79,6 +120,10 @@ class CommentManager extends Manager
 		return $req;
 	}
 
+    /**
+    * 
+    * this method delete a comment
+    */
 	public function deleteComment($Postid)
 
     {
@@ -87,6 +132,10 @@ class CommentManager extends Manager
         return $deleteComment;
     }
 
+    /**
+    * 
+    * this method delete a reportcomment
+    */
     public function deleteReportcomment($Postid)
 
     {
@@ -97,33 +146,6 @@ class CommentManager extends Manager
 }
 
 
-class User extends Manager
-{
-    
-   public function ConnectUser($pseudo, $password)
-    {
 
-    $req = $this->db->prepare('SELECT COUNT(*) AS existe FROM users WHERE pseudo = ? AND password = ? ');
-    $ConnectUser = $req->execute(array($pseudo, $password));
-    $count = $req->fetch(\PDO::FETCH_ASSOC);
-    
-    if ($count['existe'] == 1)
-        {
-            
-            $_SESSION['user'] = $_POST['pseudo'];
-            header('location: index.php?admin=home');
-            exit();
-        }
-
-        elseif ($count['existe'] == 0 ) 
-        {
-            
-            echo"vos identifiants sont incorrect";
-            
-        }
-
-        
-    }
-}
 
 

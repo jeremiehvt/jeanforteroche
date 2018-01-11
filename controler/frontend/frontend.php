@@ -1,6 +1,9 @@
 <?php
 
-
+/**
+ * frontend abstract class controller
+ * first instruction, add construct method with include model manager
+ */
 abstract class frontend
 {
 
@@ -11,10 +14,17 @@ abstract class frontend
 
 }
 
+/**
+ * view class controller
+ * manages view for visitor
+ */
 class view extends frontend
 {
 
-
+	/**
+	* this method manage post and comment to display on the user homepage
+	* this require view
+	*/
 	public function home()
 	{
 	   
@@ -30,6 +40,10 @@ class view extends frontend
 	   	require('view/frontend/home.php');
 	}
 
+	/**
+	* this method manage post and comment to display on the user homepage
+	* this require view
+	*/
 	public function posts()
 	{
 		$PostManager = new jeanforteroche\model\frontend\PostManager();
@@ -44,6 +58,10 @@ class view extends frontend
 		require('view/frontend/posts.php');
 	}
 
+	/**
+	* this method manage post to display on the user postpage
+	* this require view
+	*/
 	public function allposts()
 	{
 		$PostManager = new jeanforteroche\model\frontend\PostManager();
@@ -59,7 +77,12 @@ class view extends frontend
 }
 
 class comment extends frontend
-{
+{	
+	/**
+	* this method manage new comment data to send to the model 
+	* this method verify the return value 
+	* this method redirect to the post page
+	*/
 	public function addComment()
 	{
 		$CommentManager = new jeanforteroche\model\frontend\CommentManager();
@@ -78,6 +101,11 @@ class comment extends frontend
 		
 	}
 
+	/**
+	* this method manage data of reportcomment to send to the model 
+	* 
+	* this method redirect to the homepage
+	*/
 	public function report()
 	{
 		
@@ -89,8 +117,17 @@ class comment extends frontend
 	}
 }
 
+/**
+ * connection class controller
+ * manages data to send to the model
+ */
 class Connexion extends frontend
-{
+{	
+	/**
+	* this method manage data of connectionform to send to the model 
+	* 
+	* 
+	*/
 	public function ConnectUser()
 	{
 		$User = new jeanforteroche\model\frontend\User();
@@ -98,6 +135,11 @@ class Connexion extends frontend
 
 	}
 
+	/**
+	* this method end admin connection
+	* 
+	* 
+	*/
 	public function Deconnexion()
 	{
 		$_SESSION = array();
