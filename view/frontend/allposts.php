@@ -12,17 +12,17 @@
           <div class="thumbnail col-md-12" id="all">
             <h3 class="headers">Tout les Billets</h3>
             <?php
-              while ($data = $allposts->fetch()) 
+              foreach ($allposts as $data ) 
                 { ?>
                     <div class="raw">
                         <div class="thumbnail col-md-3" id="allposts">
-                          <h4><?=htmlspecialchars($data['title'])?> </h4>
-                          <h5 id="allparagraphe"><?=htmlspecialchars_decode(nl2br($data['post']))?></h5>
-                          <p><em>le <?=htmlspecialchars($data['date_post'])?></em> </p>
-                          <p><a class="btn btn-primary btn-sm" href="index.php?action=post&amp;id=<?=$data['id']?>">Lire ></a></p>
+                          <h4><?=htmlspecialchars($data->getTitle())?> </h4>
+                          <h5 id="allparagraphe"><?=htmlspecialchars_decode(nl2br($data->getPost()))?></h5>
+                          <p><em>le <?=htmlspecialchars($data->getDatepost())?></em> </p>
+                          <p><a class="btn btn-primary btn-sm" href="index.php?action=post&amp;id=<?=$data->getID()?>">Lire ></a></p>
                         </div>
                     </div>
-                <?php } $allposts->closeCursor();
+                <?php } 
             ?>
            
           </div>

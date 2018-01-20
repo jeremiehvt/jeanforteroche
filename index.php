@@ -2,9 +2,12 @@
 
 session_start();
 
+require ('controler/frontend/controlerfrontendautoloader.php');
+require ('model/modelautoloader.php');
+require ('model/frontend/modelfrontendautoloader.php');
+require ('model/entity/modelentityautoloader.php');
 
-require ('controler/frontend/frontend.php');
-require ('controler/backend/backend.php');
+$db = DBFactory::dbConnect();
 
 try
 {
@@ -14,10 +17,11 @@ try
 
 		if ($_GET['action']==='addcomment') 
 		{
-			if (!empty($_GET['id']) && $_GET['id'] > 0) 
+			if (!empty($_GET['id']) && $_GET['id'] > 0)
 	        {
-	        	$comment = new comment();
-				$addcomment = $comment->addComment();
+	        	$Coment = new Coment(['idpost' => (int)$_GET['id'], 'comment' => $_POST['comment']]);
+	        	$CommentController = new CommentController();
+				$CommentController->addComment($db, $Coment);
 	        }
 
 	        elseif (empty($_GET['id']) OR !is_int($_GET['id']) OR $_GET['id'] === 0) 
@@ -26,12 +30,12 @@ try
 	        }
 		}
 
-		elseif ($_GET['action']==='post') 
+		elseif ($_GET['action']==='post')
 		{
 			if (!empty($_GET['id']) && $_GET['id'] > 0) 
 	        {
-	            $view = new view();
-				$posts = $view->posts();
+	            $view = new ViewController();
+				$view->posts($db, $_GET['id']);
 	        }
 
 	        elseif (empty($_GET['id']) OR !is_int($_GET['id']) OR $_GET['id'] === 0) 
@@ -43,9 +47,10 @@ try
 		elseif ($_GET['action']==='report') 
 		{
 			if (!empty($_GET['id']) && $_GET['id'] > 0) 
-	        {
-	            $comment = new comment();
-				$report = $comment->report();
+	        {	
+	        	$report = new ReportComment(['idcomment' => (int)$_GET['id']]);
+	            $CommentController = new CommentController();
+				$CommentController->report($db, $report);
 	        }
 
 	        elseif (empty($_GET['id']) OR !is_int($_GET['id']) OR $_GET['id'] === 0) 
@@ -54,25 +59,26 @@ try
 	        }
 		}
 
-		elseif ($_GET['action']==='allposts') 
+		elseif ($_GET['action']==='allposts')
 		{
-			$view = new view();
-			$allposts = $view->allposts();
+			$view = new viewController();
+			$view->allposts($db);
 		}
 
 		elseif ($_GET['action'] === 'connexion') 
 		{
-			$view = new View();
-			$connexion = $view->connexion();
+			$view = new ViewController();
+			$view->connexion();
 		}
 
 
 		elseif ($_GET['action'] === 'connectuser') 
 		{
 			if (!empty($_POST['pseudo']) && !empty($_POST['password'])) 
-			{
-				$connexion = new Connexion();
-				$connect = $connexion->ConnectUser();
+			{	
+				$user = new User([''=>$_POST['pseudo'],'password'=>$_POST['password']]);
+				$connexion = new ConnexionController();
+				$connexion->ConnectUser($db);
 			}
 
 			elseif (empty($_GET['pseudo']) OR empty($_GET['password'])) 
@@ -85,7 +91,6 @@ try
 		{
 			throw new Exception('Une erreur est survenue');
 		}
-
 	}
 
 
@@ -96,56 +101,56 @@ try
 			if ($_GET['admin'] === 'home')
 			{	
 				$view = new AdminView();
-				$home = $view->adminHome();
+				$view->adminHome($db);
 			}
 
 			elseif ($_GET['admin'] === 'deletepost') 
 			{
 				$admin = new AdminPost();
-				$deletepost = $admin->deletePost();
+				$admin->deletePost($db);
 			}
 
 			elseif ($_GET['admin'] === 'deletecomment')
 			{
 				$admin = new AdminComment();
-				$deletecomment = $admin->deleteComment();
+				$admin->deleteComment($db);
 			}
 
 			elseif ($_GET['admin'] === 'deletereport')
 			{
 				$admin = new AdminComment();
-				$deletereportcomment = $admin->deleteReportcomment();
+				$admin->deleteReportcomment($db);
 			}
 
 			elseif ($_GET['admin'] === 'newpost') 
 			{
 				$view = new AdminView();
-				$new = $view->newpost();
+				$view->newpost($db);
 			}
 
 			elseif ($_GET['admin'] === 'editpost') 
 			{
 
 				$view = new AdminView();
-				$edit = $view->editpost();
+				$view->editpost($db);
 			}
 
 			elseif ($_GET['admin'] === 'addpost') 
 			{
 				$admin = new AdminPost();
-				$add = $admin->addPost();
+				$admin->addPost($db);
 			}
 
 			elseif ($_GET['admin'] === 'updatepost') 
 			{
 				$post = new AdminPost();
-				$update = $post->updatePost();
+				$post->updatePost($db);
 			}
 
 			elseif ($_GET['admin'] === 'deconnexion') 
 			{
 				$deconnexion = new Connexion();
-				$death = $deconnexion->Deconnexion();
+				$deconnexion->Deconnexion($db);
 			}
 
 			elseif (!is_string($_GET['admin'])) 
@@ -156,8 +161,8 @@ try
 
 	else
 	{
-		$view = new view();
-		$home = $view->home();
+		$view = new ViewController();
+		$view->home($db);
 	}
 
 

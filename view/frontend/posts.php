@@ -11,11 +11,11 @@
             
                   <div class="thumbnail col-md-6" id="selectedpost">
                     <?php
-                      while ($select = $post->fetch()) 
+                      foreach ($post as $select) 
                         { ?>
-                          <h2><?=htmlspecialchars($select['select_title'])?></h2>
-                          <p><em>le <?=htmlspecialchars($select['date_post'])?></em></p>
-                          <h4><?=htmlspecialchars_decode(nl2br($select['select_post']))?></h4>
+                          <h2><?=htmlspecialchars($select->getTitle())?></h2>
+                          <p><em>le <?=htmlspecialchars($select->getDatepost())?></em></p>
+                          <h4><?=htmlspecialchars_decode(nl2br($select->getPost()))?></h4>
                         <?php }
                     ?>
                   </div>
@@ -27,11 +27,11 @@
                     <div class="col-md-8">
                     <h3 class="headers">Commentaires</h3>
                       <?php
-                        while ($data = $postComments->fetch()) 
+                        foreach ($postComments as $data) 
                           {?>
-                            <h5><em>le <?=htmlspecialchars($data['date_comment'])?></em></h5>
-                            <h5><?=htmlspecialchars($data['comment'])?></h5>
-                            <p><a href="index.php?action=report&amp;id=<?=$data['id']?>" class="btn btn-danger btn-xs">signaler</a></p>
+                            <h5><em>le <?=htmlspecialchars($data->getDatecomment())?></em></h5>
+                            <h5><?=htmlspecialchars($data->getComment())?></h5>
+                            <p><a href="index.php?action=report&amp;id=<?=$data->getID()?>" class="btn btn-danger btn-xs">signaler</a></p>
                           <?php }
                         
                       ?>
@@ -58,15 +58,15 @@
           <div class="thumbnail col-md-10" id="otherposts">
             <h3>Les autres Billets</h3>
             <?php
-              while ($other = $allposts->fetch()) 
+              foreach ($allposts as $other) 
                 { ?>
                   
                     <div class="raw">
                         <div class="thumbnail col-md-5" id="otherlastpost">
-                          <h4><?=htmlspecialchars($other['title'])?> </h4>
-                          <h5 id="otherparagraphe"><?=htmlspecialchars_decode(nl2br($other['post']))?></h5>
-                          <p><em>le <?=htmlspecialchars($other['date_post'])?></em> </p>
-                          <p><a class="btn btn-primary btn-sm" href="index.php?action=post&amp;id=<?=$other['id']?>">Lire ></a></p>
+                          <h4><?=htmlspecialchars($other->getTitle())?> </h4>
+                          <h5 id="otherparagraphe"><?=htmlspecialchars_decode(nl2br($other->getPost()))?></h5>
+                          <p><em>le <?=htmlspecialchars($other->getDatepost())?></em> </p>
+                          <p><a class="btn btn-primary btn-sm" href="index.php?action=post&amp;id=<?=$other->getID()?>">Lire></a></p>
                         </div>
                     </div>
                   

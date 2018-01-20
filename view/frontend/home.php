@@ -25,14 +25,14 @@
       <section class="col-md-8">
         <div class="raw">
             <?php
-              while ($data = $posts->fetch())
+              foreach ($lastpost as $data)
               { ?>
                 <div class="thumbnail col-md-12" id="firstpost">
                   <h3 class="headers">À la Une</h3>
-                  <h2> <?=htmlspecialchars($data['newtitle'])?></h2>
-                  <p><em>le <?=htmlspecialchars($data['date_post'])?> </em></p>
-                  <h4 id="firstparagraphe"><?=htmlspecialchars_decode(nl2br($data['newpost']))?></h4>
-                  <p><a class="btn btn-primary" href="index.php?action=post&amp;id=<?=$data['id']?>">Lire ></a></p>
+                  <h2> <?=htmlspecialchars($data->getTitle())?></h2>
+                  <p><em>le <?=htmlspecialchars($data->getDatepost())?> </em></p>
+                  <h4 id="firstparagraphe"><?=htmlspecialchars_decode(nl2br($data->getPost()))?></h4>
+                  <p><a class="btn btn-primary" href="index.php?action=post&amp;id=<?=$data->getID()?>">Lire ></a></p>
                 </div>
 
               <?php }
@@ -41,18 +41,18 @@
           <div class="col-md-12 thumbnail" id="posts">
             <h3>Les derniers Billets</h3>
             <?php
-              while ($data = $lastposts->fetch()) 
+              foreach ($lastposts as $data) 
                 { ?>
                   
                     <div class="raw">
                         <div class="thumbnail col-md-5" id="lastposts" >
-                          <h4> <?=htmlspecialchars($data['title'])?></h4>
-                            <p><em class="date">le <?=htmlspecialchars($data['date_post'])?> </em></p>
-                            <h5 id="lastparagraphe"><?=htmlspecialchars_decode(nl2br($data['post']))?></h5>
-                          <p><a class="btn btn-primary btn-sm" href="index.php?action=post&amp;id=<?=$data['id']?>">Lire ></a></p>
+                          <h4> <?=htmlspecialchars($data->getTitle())?></h4>
+                            <p><em class="date">le <?=htmlspecialchars($data->getDatepost())?> </em></p>
+                            <h5 id="lastparagraphe"><?=htmlspecialchars_decode(nl2br($data->getPost()))?></h5>
+                          <p><a class="btn btn-primary btn-sm" href="index.php?action=post&amp;id=<?=$data->getID()?>">Lire ></a></p>
                         </div>
                     </div>
-                  
+                    
                 <?php }
             ?>
           </div>
@@ -63,16 +63,17 @@
       <aside class="col-md-2">
         
           <h3 class="headers">Les derniers commentaires</h3>
-            
-              <ul class="list-group">
+
+             <ul class="list-group">
                 <?php
-                while ( $data = $allcomments->fetch()) 
+                foreach ($allcomments as $com)
                   { ?>
                     
-                    <li class="list-group-item"><em class="date">le <?=htmlspecialchars($data['date_comment'])?></em><br><?=htmlspecialchars($data['comment'])?><br><a class="btn btn-danger btn-xs" href="index.php?action=report&amp;id=<?=$data['id']?>">signaler</a></li>
+                    <li class="list-group-item"><em class="date">le <?=$com->getDatecomment()?></em><br><?=$com->getComment()?><br><a class="btn btn-danger btn-xs" href="index.php?action=report&amp;id=<?=$com->getID()?>">signaler</a></li>
                   <?php }
                 ?>
               </ul>
+
             
        
       </aside>
