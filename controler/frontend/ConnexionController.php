@@ -4,7 +4,7 @@
  * connection class controller
  * manages data to send to the manager
  */
-class Connexion 
+class ConnexionController
 {	
 	/**
 	* this method manage data of connectionform to send to the model 
@@ -13,8 +13,8 @@ class Connexion
 	*/
 	public function ConnectUser($db, User $user)
 	{	
-		$UserManager = FrontendUserManager();
-		$ConnectUser = $UserManager->ConnectUser($db, $user);
+		$UserManager = new FrontendUserManager($db);
+		$ConnectUser = $UserManager->ConnectUser($user);
 	}
 
 	/**

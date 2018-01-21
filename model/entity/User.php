@@ -3,7 +3,7 @@
 /**
 * Users model class
 */
-class Users  
+class User 
 {
 	protected $id;
 	protected $pseudo;
@@ -61,7 +61,7 @@ class Users
 
 	public function setPseudo($pseudo)
 	{
-		$this->post = $pseudo;
+		$this->pseudo = $pseudo;
 	}
 
 	public function setEmail($email)
@@ -71,8 +71,8 @@ class Users
 
 	public function setPassword($password)
 	{
-		$crypt = sha1($password);
-		$this->email = ;
+	
+		$this->password = $password;
 	}
 
 }

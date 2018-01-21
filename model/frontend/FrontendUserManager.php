@@ -27,8 +27,8 @@ class FrontendUserManager
     {
 
     $req = $this->db->prepare('SELECT COUNT(*) AS existe FROM users WHERE pseudo = :pseudo AND password = :password ');
-    $req->bindValue(':pseudo'=> $user->getPseudo());
-    $req->bindValue(':password'=> $user->getPassword());
+    $req->bindValue(':pseudo' , $user->getPseudo());
+    $req->bindValue(':password', $user->getPassword());
     $req->execute();
     $ConnectUser = $req->fetch(PDO::FETCH_ASSOC);
     
@@ -52,9 +52,9 @@ class FrontendUserManager
     // à voir et modifié
     public function updatePassword(User $newpassword)
     {
-        $req = $this->db->prepare('UPDATE users SET password = :password, pseudo =>:pseudo')
-        $req->bindValue(':pseudo'=>$newpassword->getPseudo());
-        $req->bindValue(':password'=>$newpassword->getPseudo());
+        $req = $this->db->prepare('UPDATE users SET password = :password, pseudo =>:pseudo');
+        $req->bindValue(':pseudo',$user->getPseudo());
+        $req->bindValue(':password',$user->getPseudo());
         
     }
 

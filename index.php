@@ -3,9 +3,12 @@
 session_start();
 
 require ('controler/frontend/controlerfrontendautoloader.php');
+require ('controler/backend/controlerbackendautoloader.php');
 require ('model/modelautoloader.php');
 require ('model/frontend/modelfrontendautoloader.php');
+require ('model/backend/modelbackendautoloader.php');
 require ('model/entity/modelentityautoloader.php');
+
 
 $db = DBFactory::dbConnect();
 
@@ -48,7 +51,7 @@ try
 		{
 			if (!empty($_GET['id']) && $_GET['id'] > 0) 
 	        {	
-	        	$report = new ReportComment(['idcomment' => (int)$_GET['id']]);
+	        	$report = new ReportComment(['idcomment' => $_GET['id']]);
 	            $CommentController = new CommentController();
 				$CommentController->report($db, $report);
 	        }
@@ -76,9 +79,9 @@ try
 		{
 			if (!empty($_POST['pseudo']) && !empty($_POST['password'])) 
 			{	
-				$user = new User([''=>$_POST['pseudo'],'password'=>$_POST['password']]);
+				$user = new User(['pseudo'=>$_POST['pseudo'],'password'=>$_POST['password']]);
 				$connexion = new ConnexionController();
-				$connexion->ConnectUser($db);
+				$connexion->ConnectUser($db, $user);
 			}
 
 			elseif (empty($_GET['pseudo']) OR empty($_GET['password'])) 
@@ -106,45 +109,101 @@ try
 
 			elseif ($_GET['admin'] === 'deletepost') 
 			{
-				$admin = new AdminPost();
-				$admin->deletePost($db);
+				if (!empty($_GET['id'])) 
+				{	
+					$post = new Post(['id'=>$_GET['id']]);
+					$admin = new AdminPost();
+					$admin->deletePost($db,$post);
+				}
+
+				else
+				{
+					throw new Exception("l'url doit contenir un identifiant valide");
+					
+				}	
 			}
 
 			elseif ($_GET['admin'] === 'deletecomment')
 			{
-				$admin = new AdminComment();
-				$admin->deleteComment($db);
+				if (!empty($_GET['id'])) 
+				{
+					$coment = new Coment(['id'=>$_GET['id']]);
+					$admin = new AdminComment();
+					$admin->deleteComment($db, $coment);
+				}
+
+				else
+				{
+					throw new Exception("l'url doit contenir un identifiant valide");
+				}
+				
 			}
 
 			elseif ($_GET['admin'] === 'deletereport')
 			{
-				$admin = new AdminComment();
-				$admin->deleteReportcomment($db);
+				if (!empty($_GET['id'])) 
+				{
+					$reportcoment = new ReportComment(['idcomment'=>$_GET['id']]);
+					$admin = new AdminComment();
+					$admin->deleteReportcomment($db, $reportcoment);
+				}
+
+				else
+				{
+					throw new Exception("l'url doit contenir un identifiant valide");
+				}	
 			}
 
 			elseif ($_GET['admin'] === 'newpost') 
 			{
 				$view = new AdminView();
-				$view->newpost($db);
+				$view->newpost();
 			}
 
 			elseif ($_GET['admin'] === 'editpost') 
 			{
+				if (!empty($_GET['id'])) 
+				{
+					$post = new Post(['id'=>$_GET['id']]);
+					$view = new AdminView();
+					$view->editpost($db, $post);
+				}
 
-				$view = new AdminView();
-				$view->editpost($db);
+				else
+				{
+					throw new Exception("l'url doit contenir un identifiant valide");
+				}	
 			}
 
 			elseif ($_GET['admin'] === 'addpost') 
 			{
-				$admin = new AdminPost();
-				$admin->addPost($db);
+				if (!empty($_POST['title']) && !empty($_POST['post'])) 
+				{
+					$post = new Post(['title'=>$_POST['title'], 'post'=>$_POST['post']]);
+					$admin = new AdminPost();
+					$admin->addPost($db, $post);
+				}
+				
+				else
+				{
+					throw new Exception("les champs ne peuvent pas être vide");	
+				}
 			}
 
 			elseif ($_GET['admin'] === 'updatepost') 
 			{
-				$post = new AdminPost();
-				$post->updatePost($db);
+
+				if (!empty($_POST['title']) && !empty($_POST['post'])) 
+				{
+					$post = new Post(['id'=>$_GET['id'],'title'=>$_POST['title'], 'post'=>$_POST['post']]);
+					$update = new AdminPost();
+					$update->updatePost($db,$post);
+				}
+				
+				else
+				{
+					throw new Exception("les champs ne peuvent pas être vide");	
+				}
 			}
 
 			elseif ($_GET['admin'] === 'deconnexion') 

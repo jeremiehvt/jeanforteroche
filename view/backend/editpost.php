@@ -10,7 +10,7 @@
                       <form action="index.php?admin=updatepost&id=<?=$_GET['id']?>" method="POST" class="form-horizontal col-md-10">
                        <h3 class="form-group">Modifier votre article</h3>
                           <?php 
-                          while ($data = $post->fetch())
+                          foreach ($post as $data)
                           {?>
 
 
@@ -19,7 +19,7 @@
                                     <div class="form-group">
                                       <label for="title" class="col-md-1">titre</label>
                                       <div class="col-md-3">
-                                        <input type="text" name="title" id="title" class="form-control" value="<?=htmlspecialchars_decode(nl2br($data['select_title']));?>" required>
+                                        <input type="text" name="title" id="title" class="form-control" value="<?=htmlspecialchars($data->getTitle());?>" required>
                                       </div>
                                     </div>
                                   </div>
@@ -29,7 +29,7 @@
                                       <div class="col-md-8">
                                         <textarea type="text" name="post" id="post" class="form-control" required>
                                           
-                                              <?=htmlspecialchars_decode(nl2br($data['select_post']));?>
+                                              <?=htmlspecialchars_decode(nl2br($data->getPost()));?>
                                          
                                             
                                           
@@ -38,7 +38,7 @@
                                     </div>
                                   </div>
 
-                              <?php } $post->closeCursor(); ?>
+                              <?php } ?>
 
                               
 
