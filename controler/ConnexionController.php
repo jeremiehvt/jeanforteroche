@@ -13,7 +13,7 @@ class ConnexionController
 	*/
 	public function ConnectUser($db, User $user)
 	{	
-		$UserManager = new FrontendUserManager($db);
+		$UserManager = new UserManager($db);
 		$ConnectUser = $UserManager->ConnectUser($user);
 	}
 

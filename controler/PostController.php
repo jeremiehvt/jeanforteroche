@@ -3,7 +3,7 @@
  * adminpost class controller
  * manages newpost for admin
  */
-class AdminPost 
+class PostController
 {	
 	/**
 	* this method send data to the model to add newpost

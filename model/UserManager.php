@@ -6,7 +6,7 @@
 * this class verify the id's of user to connect him to admin
 *  
 */
-class FrontendUserManager 
+class UserManager 
 {
     
     protected $db;

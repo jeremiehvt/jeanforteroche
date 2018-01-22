@@ -4,7 +4,7 @@
  * class PostManager
  * this class manage all interaction with db to select posts
  */
-class FrontendPostManager 
+class PostManager 
 {
 
     protected $db;
@@ -78,14 +78,58 @@ class FrontendPostManager
 	* 
 	* this method select one post 
 	*/
-    public function getPost($Postid)
+    public function getPost(post $post)
 
     {
 	    $req = $this->db->prepare('SELECT id, title, post, DATE_FORMAT(date_post, \'%d/%m/%y à %Hh%i\') AS date_post FROM posts WHERE id = :postid');
-	    $req->bindValue(':postid', $Postid, PDO::PARAM_INT);
+	    $req->bindValue(':postid', $post->getID(), PDO::PARAM_INT);
         $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Post');
         $req->execute();
         $post = $req->fetchall();
         return $post;
+    }
+
+
+
+    /**
+    * 
+    * this method insert post
+    */
+    public function addPost(Post $post)
+
+    {
+        $req = $this->db->prepare('INSERT INTO posts(post,title,date_post) VALUES(:post,:title,NOW())');
+        $req->bindValue(':post',$post->getPost());
+        $req->bindValue(':title',$post->getTitle());
+        $req->execute();
+        return $addPost = $req;   
+    }
+
+    /**
+    * 
+    * this method update post
+    */
+    public function updatePost(Post $post)
+
+    {
+        $req = $this->db->prepare(' UPDATE posts SET title = :title, post = :post WHERE id = :id');
+        $req->bindValue(':post',$post->getPost());
+        $req->bindValue(':title',$post->getTitle());
+        $req->bindValue(':id',$post->getID());
+        $req->execute();
+        return $updatePost = $req;   
+    }
+
+    /**
+    * 
+    * this method delete a post
+    */
+    public function deletePost(Post $post)
+
+    {
+        $req = $this->db->prepare(' DELETE FROM posts WHERE id = :id');
+        $req->bindValue(':id',$post->getID());
+        $req->execute();
+        return $deletePost = $req;
     }
 }

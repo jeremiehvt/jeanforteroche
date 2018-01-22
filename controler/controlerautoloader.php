@@ -1,6 +1,6 @@
 <?php
 
-function modelentityautoloader($classsname)
+function controlerautoloader($classsname)
 {
 	if (file_exists($file = __DIR__.'/'.$classsname.'.php')) 
 	{
@@ -8,4 +8,4 @@ function modelentityautoloader($classsname)
 	}
 }
 
-spl_autoload_register('modelentityautoloader');
+spl_autoload_register('controlerautoloader');
