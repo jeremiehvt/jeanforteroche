@@ -11,7 +11,7 @@ class ConnexionController
 	* 
 	* 
 	*/
-	public function ConnectUser($db, User $user)
+	public function connectUser($db, User $user)
 	{	
 		$UserManager = new UserManager($db);
 		$ConnectUser = $UserManager->ConnectUser($user);
@@ -22,10 +22,15 @@ class ConnexionController
 	* 
 	* 
 	*/
-	public function Deconnexion()
+	public function deconnexion()
 	{
 		$_SESSION = array();
 		session_destroy();
 		header('location: index.php');
+	}
+
+	public function updatePassword()
+	{
+
 	}
 }

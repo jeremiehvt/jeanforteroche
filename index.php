@@ -78,7 +78,7 @@ try
 			{	
 				$user = new User(['pseudo'=>$_POST['pseudo'],'password'=>$_POST['password']]);
 				$connexion = new ConnexionController();
-				$connexion->ConnectUser($db, $user);
+				$connexion->connectUser($db, $user);
 			}
 
 			elseif (empty($_GET['pseudo']) OR empty($_GET['password'])) 
@@ -206,7 +206,7 @@ try
 			elseif ($_GET['admin'] === 'deconnexion') 
 			{
 				$deconnexion = new ConnexionController();
-				$deconnexion->Deconnexion($db);
+				$deconnexion->deconnexion($db);
 			}
 
 			elseif (!is_string($_GET['admin'])) 

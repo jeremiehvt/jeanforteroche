@@ -25,10 +25,10 @@ class UserManager
 
    public function ConnectUser(User $user)
     {
-
+    $hash = hash('sha512',$user->getPassword());
     $req = $this->db->prepare('SELECT COUNT(*) AS existe FROM users WHERE pseudo = :pseudo AND password = :password ');
     $req->bindValue(':pseudo' , $user->getPseudo());
-    $req->bindValue(':password', $user->getPassword());
+    $req->bindValue(':password', $hash);
     $req->execute();
     $ConnectUser = $req->fetch(PDO::FETCH_ASSOC);
     
