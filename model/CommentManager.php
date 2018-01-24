@@ -53,7 +53,7 @@ class CommentManager
 	public function getReportcomments()
 	{
 		$req = $this->db->query('SELECT DISTINCT id_comment FROM reportcomments ORDER BY id_comment DESC ');
-	    $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\entity\reportcomment');
+	    $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\entity\ReportComment');
         $reportcomments = $req->fetchall();
 		return $reportcomments;
 	}

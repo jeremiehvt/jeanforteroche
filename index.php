@@ -8,9 +8,9 @@ require ('controler/Autoloader.php');
 require ('model/Autoloader.php');
 require ('entity/Autoloader.php');
 
-controler\Autoloader::register();
-model\Autoloader::register();
-entity\Autoloader::register();
+\controler\Autoloader::register();
+\model\Autoloader::register();
+\entity\Autoloader::register();
 
 $db = model\DBFactory::dbConnect();
 
@@ -67,7 +67,7 @@ try
 
 		elseif ($_GET['action']==='allposts')
 		{
-			$view = new \controler\viewController();
+			$view = new \controler\ViewController();
 			$view->allposts($db);
 		}
 
