@@ -18,7 +18,7 @@
   <![endif]-->
       <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=mjxbftrvqwoj0x1uy323jwu9eyababfvh542tk4s2ktxee11"></script>
       <script type="text/javascript">
-        tinymce.init({selector: '#post',language_url : 'lang/fr_FR.JS',branding : false, menubar : false});
+        tinymce.init({selector: '#post',language_url : 'lang/fr_FR.js',branding : false, menubar : false});
       </script>
 
 
