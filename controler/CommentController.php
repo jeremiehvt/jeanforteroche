@@ -1,4 +1,9 @@
 <?php
+namespace controler;
+/**
+ * Comment class controller
+ * manages commments 
+ */
 class CommentController 
 {	
 	/**
@@ -6,9 +11,9 @@ class CommentController
 	* this method verify the return value 
 	* this method redirect to the post page
 	*/
-	public function addComment($db, Coment $coment)
+	public function addComment($db, \entity\Coment $coment)
 	{
-		$CommentManager = new CommentManager($db);
+		$CommentManager = new \model\CommentManager($db);
 		$postComments = $CommentManager->postComment($coment);
 
 		if ($postComments === FALSE) 
@@ -29,10 +34,10 @@ class CommentController
 	* 
 	* this method redirect to the homepage
 	*/
-	public function report($db, ReportComment $report)
+	public function report($db, \entity\ReportComment $report)
 	{
 		
-			$CommentManager = new CommentManager($db);
+			$CommentManager = new \model\CommentManager($db);
 			$reportComment = $CommentManager->reportComment($report);
 
 			header('location: index.php?');
@@ -46,9 +51,9 @@ class CommentController
 	*
 	* this method redirect to adminhomepage
 	*/
-	public function deleteComment($db, Coment $coment)
+	public function deleteComment($db, \entity\Coment $coment)
 	{
-		$CommentManager = new CommentManager($db);
+		$CommentManager = new \model\CommentManager($db);
 		$deleteComment = $CommentManager->deleteComment($coment);
 		
 
@@ -61,9 +66,9 @@ class CommentController
 	*
 	* this method redirect to adminhomepage
 	*/
-	public function deleteReportcomment($db, ReportComment $reportcoment)
+	public function deleteReportcomment($db, \entity\ReportComment $reportcoment)
 	{
-		$CommentManager = new CommentManager($db);
+		$CommentManager = new \model\CommentManager($db);
 		$deleteReportcomment = $CommentManager->deleteReportcomment($reportcoment);
 		header('location: index.php?admin=home');
 		exit();

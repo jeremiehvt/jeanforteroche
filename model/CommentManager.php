@@ -1,9 +1,9 @@
 <?php
-
+namespace model;
 
 /**
  * class commentManager
- * this class manage all interaction with db to select or insert comments
+ * this class manage all interaction with db for comments
  */
 class CommentManager
 {	
@@ -27,7 +27,7 @@ class CommentManager
 	public function getAllcomments()
 	{
 		$req = $this->db->query('SELECT id, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments ORDER BY date_comment DESC');
-		$req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Coment');
+		$req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\entity\Coment');
 		$allcomments = $req->fetchall();
 		return $allcomments;
 	}
@@ -36,11 +36,11 @@ class CommentManager
 	* 
 	* this method select all comments from a post
 	*/
-	public function getComments(coment $coment)
+	public function getComments(\entity\coment $coment)
 	{
 		$req = $this->db->prepare('SELECT id, id_post, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments WHERE id_post = :postid ORDER BY id DESC LIMIT 0, 10');
 		$req->bindValue(':postid',$coment->getIdpost());
-		$req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Coment');
+		$req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\entity\Coment');
 		$req->execute();
 		$comments = $req->fetchall();
 		return $comments;
@@ -53,7 +53,7 @@ class CommentManager
 	public function getReportcomments()
 	{
 		$req = $this->db->query('SELECT DISTINCT id_comment FROM reportcomments ORDER BY id_comment DESC ');
-	    $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'reportcomment');
+	    $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\entity\reportcomment');
         $reportcomments = $req->fetchall();
 		return $reportcomments;
 	}
@@ -62,7 +62,7 @@ class CommentManager
 	* 
 	* this method insert a new comment
 	*/
-	public function postComment(Coment $coment)
+	public function postComment(\entity\Coment $coment)
 	{
 		$req = $this->db->prepare('INSERT INTO comments(id_post, comment, date_comment) VALUES (:postid,:comment,NOW())');
 		$req->bindValue(':postid', $coment->getIDpost());
@@ -74,7 +74,7 @@ class CommentManager
 	* 
 	* this method insert a new comment in reportcomment
 	*/
-	public function reportComment(ReportComment $report)
+	public function reportComment(\entity\ReportComment $report)
 	{
 		$req = $this->db->prepare('INSERT INTO reportcomments(id_comment) VALUES (:idcoment)');
 		$req->bindValue(':idcoment',$report->getIdcomment());
@@ -86,7 +86,7 @@ class CommentManager
     * 
     * this method delete a comment
     */
-	public function deleteComment(Coment $coment)
+	public function deleteComment(\entity\Coment $coment)
 
     {
     	$req = $this->db->prepare(' DELETE FROM comments WHERE id = :id');
@@ -100,7 +100,7 @@ class CommentManager
     * 
     * this method delete a reportcomment
     */
-    public function deleteReportcomment(ReportComment $reportcoment)
+    public function deleteReportcomment(\entity\ReportComment $reportcoment)
 
     {
         $req = $this->db->prepare(' DELETE FROM reportcomments WHERE id_comment = :id');

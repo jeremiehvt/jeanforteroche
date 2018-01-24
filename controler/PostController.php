@@ -1,7 +1,8 @@
 <?php
+namespace controler;
 /**
  * adminpost class controller
- * manages newpost for admin
+ * manages posts 
  */
 class PostController
 {	
@@ -10,14 +11,14 @@ class PostController
 	* this method verify the return value
 	* this method redirect to adminhomepage
 	*/
-	public function addPost($db, Post $post)
+	public function addPost($db, \entity\Post $post)
 	{
-		$PostManager = new PostManager($db);
+		$PostManager = new \model\PostManager($db);
 		$addPost = $PostManager->addPost($post);
 
 		if ($addPost === FALSE) 
 		{
-			throw new Exception('Une erreur est survenue');
+			throw new \Exception('Une erreur est survenue');
 		}
 
 		else
@@ -33,14 +34,14 @@ class PostController
 	* this method verify the return value 
 	* this method redirect to adminhomepage
 	*/
-	public function updatePost($db, Post $post)
+	public function updatePost($db, \entity\Post $post)
 	{
-		$PostManager = new PostManager($db);
+		$PostManager = new \model\PostManager($db);
 		$updatePost = $PostManager->updatePost($post);
 
 		if ($updatePost === FALSE) 
 		{
-			throw new Exception('Une erreur est survenue');
+			throw new \Exception('Une erreur est survenue');
 		}
 		else
 		{
@@ -55,9 +56,9 @@ class PostController
 	*
 	* this method redirect to adminhomepage
 	*/
-	public function deletePost($db, Post $post)
+	public function deletePost($db, \entity\Post $post)
 	{
-		$PostManager = new PostManager($db);
+		$PostManager = new \model\PostManager($db);
 		$deletePost = $PostManager->deletePost($post);
 
 		header('location: index.php?admin=home');

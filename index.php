@@ -2,11 +2,17 @@
 
 session_start();
 
-require ('controler/controlerautoloader.php');
-require ('model/modelautoloader.php');
-require ('entity/entityautoloader.php');
 
-$db = DBFactory::dbConnect();
+
+require ('controler/Autoloader.php');
+require ('model/Autoloader.php');
+require ('entity/Autoloader.php');
+
+controler\Autoloader::register();
+model\Autoloader::register();
+entity\Autoloader::register();
+
+$db = model\DBFactory::dbConnect();
 
 try
 {
@@ -17,14 +23,14 @@ try
 		{
 			if (!empty($_GET['id']) && $_GET['id'] > 0)
 	        {
-	        	$Coment = new Coment(['idpost' => $_GET['id'], 'comment' => $_POST['comment']]);
-	        	$CommentController = new CommentController();
+	        	$Coment = new \entity\Coment(['idpost' => $_GET['id'], 'comment' => $_POST['comment']]);
+	        	$CommentController = new \controler\CommentController();
 				$CommentController->addComment($db, $Coment);
 	        }
 
 	        elseif (empty($_GET['id']) OR !is_int($_GET['id']) OR $_GET['id'] === 0) 
 	        {
-	        	throw new Exception('Une erreur est survenue');
+	        	throw new \Exception('Une erreur est survenue');
 	        }
 		}
 
@@ -32,15 +38,15 @@ try
 		{
 			if (!empty($_GET['id']) && $_GET['id'] > 0) 
 	        {	
-	        	$post = new Post(['id'=>$_GET['id']]);
-	        	$coment = new Coment(['idpost' => $_GET['id']]);
-	            $view = new ViewController();
+	        	$post = new \entity\Post(['id'=>$_GET['id']]);
+	        	$coment = new \entity\Coment(['idpost' => $_GET['id']]);
+	            $view = new \controler\ViewController();
 				$view->posts($db, $post, $coment);
 	        }
 
 	        elseif (empty($_GET['id']) OR !is_int($_GET['id']) OR $_GET['id'] === 0) 
 	        {
-	        	throw new Exception('Une erreur est survenue');
+	        	throw new \Exception('Une erreur est survenue');
 	        }
 		}
 
@@ -48,26 +54,26 @@ try
 		{
 			if (!empty($_GET['id']) && $_GET['id'] > 0) 
 	        {	
-	        	$report = new ReportComment(['idcomment' => $_GET['id']]);
-	            $CommentController = new CommentController();
+	        	$report = new \entity\ReportComment(['idcomment' => $_GET['id']]);
+	            $CommentController = new \controler\CommentController();
 				$CommentController->report($db, $report);
 	        }
 
 	        elseif (empty($_GET['id']) OR !is_int($_GET['id']) OR $_GET['id'] === 0) 
 	        {
-	        	throw new Exception('Une erreur est survenue');
+	        	throw new \Exception('Une erreur est survenue');
 	        }
 		}
 
 		elseif ($_GET['action']==='allposts')
 		{
-			$view = new viewController();
+			$view = new \controler\viewController();
 			$view->allposts($db);
 		}
 
 		elseif ($_GET['action'] === 'connexion') 
 		{
-			$view = new ViewController();
+			$view = new \controler\ViewController();
 			$view->connexion();
 		}
 
@@ -76,20 +82,20 @@ try
 		{
 			if (!empty($_POST['pseudo']) && !empty($_POST['password'])) 
 			{	
-				$user = new User(['pseudo'=>$_POST['pseudo'],'password'=>$_POST['password']]);
-				$connexion = new ConnexionController();
+				$user = new \entity\User(['pseudo'=>$_POST['pseudo'],'password'=>$_POST['password']]);
+				$connexion = new \controler\ConnexionController();
 				$connexion->connectUser($db, $user);
 			}
 
 			elseif (empty($_GET['pseudo']) OR empty($_GET['password'])) 
 			{
-				throw new Exception('Veuillez remplir tout les champs de saisie de texte');
+				throw new \Exception('Veuillez remplir tout les champs de saisie de texte');
 			}
 		}
 
 		elseif (!is_string($_GET['action'])) 
 		{
-			throw new Exception('Une erreur est survenue');
+			throw new \Exception('Une erreur est survenue');
 		}
 	}
 
@@ -100,7 +106,7 @@ try
 		
 			if ($_GET['admin'] === 'home')
 			{	
-				$view = new ViewController();
+				$view = new \controler\ViewController();
 				$view->adminHome($db);
 			}
 
@@ -108,14 +114,14 @@ try
 			{
 				if (!empty($_GET['id'])) 
 				{	
-					$post = new Post(['id'=>$_GET['id']]);
-					$admin = new PostController();
+					$post = new \entity\Post(['id'=>$_GET['id']]);
+					$admin = new \controler\PostController();
 					$admin->deletePost($db,$post);
 				}
 
 				else
 				{
-					throw new Exception("l'url doit contenir un identifiant valide");
+					throw new \Exception("l'url doit contenir un identifiant valide");
 					
 				}	
 			}
@@ -124,14 +130,14 @@ try
 			{
 				if (!empty($_GET['id'])) 
 				{
-					$coment = new Coment(['id'=>$_GET['id']]);
-					$admin = new CommentController();
+					$coment = new \entity\Coment(['id'=>$_GET['id']]);
+					$admin = new \controler\CommentController();
 					$admin->deleteComment($db, $coment);
 				}
 
 				else
 				{
-					throw new Exception("l'url doit contenir un identifiant valide");
+					throw new \Exception("l'url doit contenir un identifiant valide");
 				}
 				
 			}
@@ -140,20 +146,20 @@ try
 			{
 				if (!empty($_GET['id'])) 
 				{
-					$reportcoment = new ReportComment(['idcomment'=>$_GET['id']]);
-					$admin = new CommentController();
+					$reportcoment = new \entity\ReportComment(['idcomment'=>$_GET['id']]);
+					$admin = new \controler\CommentController();
 					$admin->deleteReportcomment($db, $reportcoment);
 				}
 
 				else
 				{
-					throw new Exception("l'url doit contenir un identifiant valide");
+					throw new \Exception("l'url doit contenir un identifiant valide");
 				}	
 			}
 
 			elseif ($_GET['admin'] === 'newpost') 
 			{
-				$view = new ViewController();
+				$view = new \controler\ViewController();
 				$view->newpost();
 			}
 
@@ -161,14 +167,14 @@ try
 			{
 				if (!empty($_GET['id'])) 
 				{
-					$post = new Post(['id'=>$_GET['id']]);
-					$view = new ViewController();
+					$post = new \entity\Post(['id'=>$_GET['id']]);
+					$view = new \controler\ViewController();
 					$view->editpost($db, $post);
 				}
 
 				else
 				{
-					throw new Exception("l'url doit contenir un identifiant valide");
+					throw new \Exception("l'url doit contenir un identifiant valide");
 				}	
 			}
 
@@ -176,14 +182,14 @@ try
 			{
 				if (!empty($_POST['title']) && !empty($_POST['post'])) 
 				{
-					$post = new Post(['title'=>$_POST['title'], 'post'=>$_POST['post']]);
-					$admin = new PostController();
+					$post = new \entity\Post(['title'=>$_POST['title'], 'post'=>$_POST['post']]);
+					$admin = new \controler\PostController();
 					$admin->addPost($db, $post);
 				}
 				
 				else
 				{
-					throw new Exception("les champs ne peuvent pas être vide");	
+					throw new \Exception("les champs ne peuvent pas être vide");	
 				}
 			}
 
@@ -192,8 +198,8 @@ try
 
 				if (!empty($_POST['title']) && !empty($_POST['post'])) 
 				{
-					$post = new Post(['id'=>$_GET['id'],'title'=>$_POST['title'], 'post'=>$_POST['post']]);
-					$update = new PostController();
+					$post = new \entity\Post(['id'=>$_GET['id'],'title'=>$_POST['title'], 'post'=>$_POST['post']]);
+					$update = new \controler\PostController();
 					$update->updatePost($db,$post);
 				}
 				
@@ -205,26 +211,26 @@ try
 
 			elseif ($_GET['admin'] === 'deconnexion') 
 			{
-				$deconnexion = new ConnexionController();
+				$deconnexion = new \controler\ConnexionController();
 				$deconnexion->deconnexion($db);
 			}
 
 			elseif (!is_string($_GET['admin'])) 
 			{
-				throw new Exception('Une erreur est survenue');
+				throw new \Exception('Une erreur est survenue');
 			}
 	}
 
 	else
 	{
-		$view = new ViewController();
+		$view = new \controler\ViewController();
 		$view->home($db);
 	}
 
 
 }
 
-catch(Exception $e)
+catch(\Exception $e)
 {
 	$errormessage = $e->getmessage();
 	require('view/frontend/errorview.php');

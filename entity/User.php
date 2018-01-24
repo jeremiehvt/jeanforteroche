@@ -1,5 +1,6 @@
 <?php
 
+namespace entity;
 /**
 * Users model class
 */

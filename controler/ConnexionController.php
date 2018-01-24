@@ -1,5 +1,5 @@
 <?php
-
+namespace controler;
 /**
  * connection class controller
  * manages data to send to the manager
@@ -11,9 +11,9 @@ class ConnexionController
 	* 
 	* 
 	*/
-	public function connectUser($db, User $user)
+	public function connectUser($db, \entity\User $user)
 	{	
-		$UserManager = new UserManager($db);
+		$UserManager = new \model\UserManager($db);
 		$ConnectUser = $UserManager->ConnectUser($user);
 	}
 

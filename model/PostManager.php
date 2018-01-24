@@ -1,8 +1,8 @@
 <?php
-
+namespace model;
 /**
  * class PostManager
- * this class manage all interaction with db to select posts
+ * this class manage all interaction with db for posts
  */
 class PostManager 
 {
@@ -34,7 +34,7 @@ class PostManager
 			ORDER BY id DESC LIMIT 1 '
     	);
 
-         $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Post');
+         $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\entity\Post');
          $laspost = $req->fetchall();
          return $laspost;
 
@@ -55,7 +55,7 @@ class PostManager
 			ORDER BY id DESC LIMIT 5'
     	);
     	
-        $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Post');
+        $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\entity\Post');
         $lastposts = $req->fetchall();
        return $lastposts;
     }
@@ -69,7 +69,7 @@ class PostManager
         
         $req = $this->db->query('SELECT id, title, post, DATE_FORMAT(date_post, \'%d/%m/%y à %Hh%i\') AS date_post FROM posts ORDER BY id DESC ');
 
-        $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Post');
+        $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\entity\Post');
         $posts = $req->fetchall();
         return $posts;
     }
@@ -78,12 +78,12 @@ class PostManager
 	* 
 	* this method select one post 
 	*/
-    public function getPost(post $post)
+    public function getPost(\entity\post $post)
 
     {
 	    $req = $this->db->prepare('SELECT id, title, post, DATE_FORMAT(date_post, \'%d/%m/%y à %Hh%i\') AS date_post FROM posts WHERE id = :postid');
-	    $req->bindValue(':postid', $post->getID(), PDO::PARAM_INT);
-        $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Post');
+	    $req->bindValue(':postid', $post->getID(), \PDO::PARAM_INT);
+        $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\entity\Post');
         $req->execute();
         $post = $req->fetchall();
         return $post;
@@ -95,7 +95,7 @@ class PostManager
     * 
     * this method insert post
     */
-    public function addPost(Post $post)
+    public function addPost(\entity\Post $post)
 
     {
         $req = $this->db->prepare('INSERT INTO posts(post,title,date_post) VALUES(:post,:title,NOW())');
@@ -109,7 +109,7 @@ class PostManager
     * 
     * this method update post
     */
-    public function updatePost(Post $post)
+    public function updatePost(\entity\Post $post)
 
     {
         $req = $this->db->prepare(' UPDATE posts SET title = :title, post = :post WHERE id = :id');
@@ -124,7 +124,7 @@ class PostManager
     * 
     * this method delete a post
     */
-    public function deletePost(Post $post)
+    public function deletePost(\entity\Post $post)
 
     {
         $req = $this->db->prepare(' DELETE FROM posts WHERE id = :id');
