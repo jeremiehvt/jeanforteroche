@@ -7,7 +7,7 @@ namespace entity;
 class User 
 {
 	protected $id;
-	protected $altid
+	protected $altid;
 	protected $pseudo;
 	protected $email;
 	protected $password;
@@ -66,6 +66,12 @@ class User
 		$this->id = $id;
 	}
 
+	public function setAltid($altid)
+	{
+		$this->altid = $altid;
+	}
+
+
 	public function setPseudo($pseudo)
 	{
 		$this->pseudo = $pseudo;
@@ -82,9 +88,5 @@ class User
 		$this->password = $password;
 	}
 
-	public function getAltid($altid)
-	{
-		$this->altid = $altid;
-	}
-
+	
 }

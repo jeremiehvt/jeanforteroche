@@ -1,0 +1,3 @@
+bonjour veuillez saisir votre identifiant de confirmation d'identité à cette
+url : "http://www.jeanforteroche.ovh/index.php?action=update&eamp;control=id" qu'il faut copier coller dans
+la barre d'adresse de votre navigateur.

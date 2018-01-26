@@ -48,10 +48,10 @@ class UserManager
 
     // à voir et modifié
     public function updatePassword(\entity\User $user)
-    {
-        $req = $this->db->prepare('UPDATE users SET password = :password, pseudo =>:pseudo');
-        $req->bindValue(':pseudo',$user->getPseudo());
-        $req->bindValue(':password',$user->getPseudo()); 
+    {   
+        $hash = hash('sha512',$user->getPassword());
+        $req = $this->db->prepare('UPDATE users SET password = :password');
+        $req->bindValue(':password',$hash);
         $req->execute();  
     }
 
@@ -59,17 +59,17 @@ class UserManager
     {
         
         $req = $this->db->prepare('SELECT COUNT(*) AS valide FROM users WHERE altid = :altid');
-        $req->bindValue(':altid', $hash);
+        $req->bindValue(':altid', $user->getAltid());
         $req->execute();
         $altid = $req->fetch(\PDO::FETCH_ASSOC);
-        $result = $mail['valide'];
+        $result = $altid['valide'];
         return $result;
     }
 
     public function updateAltid($id)
     {
         $req = $this->db->prepare('UPDATE users SET altid = :altid');
-        $req->bindValue(':pseudo',$id);
+        $req->bindValue(':altid',$id);
         $req->execute(); 
     }
 

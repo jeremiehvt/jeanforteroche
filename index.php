@@ -95,14 +95,8 @@ try
 
 		elseif ($_GET['action'] === 'forgotpassword') 
 		{
-			if (!empty($_POST['password']))
-			{
-				$user = new \entity\User(['password'=>$_POST['password']]);
-				$update = new \controler\UserController();
-				$update->updatePassword($db, $user);
-			}
 
-			elseif (!empty($_POST['email']))
+			if (!empty($_POST['email']))
 			{
 				$user = new \entity\User(['email'=>$_POST['email']]);
 				$update = new \controler\UserController();
@@ -114,12 +108,19 @@ try
 				$view = new \controler\ViewController();
 				$view->forgotpassword();
 			}
-			
+	
 		}
 
 		elseif ($_GET['action'] === 'update') 
 		{
-			if ((!empty($_POST['altid'])) 
+			if (!empty($_POST['password']))
+			{
+				$user = new \entity\User(['password'=>$_POST['password']]);
+				$update = new \controler\UserController();
+				$update->updatePassword($db, $user);
+			}
+
+			elseif (!empty($_POST['altid'])) 
 			{
 				$user = new \entity\User(['altid'=>$_POST['altid']]);
 				$update = new \controler\UserController();
