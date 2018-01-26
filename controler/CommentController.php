@@ -26,7 +26,6 @@ class CommentController
 			header('location: index.php?action=post&id='.(int)$_GET['id']);
 			exit();
 		}
-		
 	}
 
 	/**
@@ -40,8 +39,18 @@ class CommentController
 			$CommentManager = new \model\CommentManager($db);
 			$reportComment = $CommentManager->reportComment($report);
 
-			header('location: index.php?');
-			exit();
+			if ($reportComment === FALSE) 
+			{
+				throw new Exception('Une erreur est survenue');
+			}
+
+			else
+			{
+				header('location: index.php?');
+				exit();
+			}
+
+			
 	}
 
 	//ADMIN

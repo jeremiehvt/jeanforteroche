@@ -24,7 +24,7 @@
 
                             <label for="password" class="col-md-1">mot de passe</label>
                             <div class="col-md-3">
-                              <input type="password" name="password" id="password" class="form-control" required>
+                              <input type="password" name="password" id="password" class="form-control" required><a href="index.php?action=forgotpassword"><p class="help-block">j'ai oublié mon mot de passe.</p></a>
                             </div>
                           </div>
                         </div>

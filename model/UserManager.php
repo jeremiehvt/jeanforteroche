@@ -25,37 +25,52 @@ class UserManager
 
    public function ConnectUser(\entity\User $user)
     {
-    $hash = hash('sha512',$user->getPassword());
-    $req = $this->db->prepare('SELECT COUNT(*) AS existe FROM users WHERE pseudo = :pseudo AND password = :password ');
-    $req->bindValue(':pseudo' , $user->getPseudo());
-    $req->bindValue(':password', $hash);
-    $req->execute();
-    $ConnectUser = $req->fetch(\PDO::FETCH_ASSOC);
-    
-    
-    if ($ConnectUser['existe'] == 1)
-        {
-            
-            $_SESSION['user'] = $user->getPseudo();
-            header('location: index.php?admin=home');
-            exit();
-        }
-
-        elseif ($ConnectUser['existe'] == 0 )
-        {
-            
-            header('location: index.php?action=connexion');
-            
-        }
-        
+        $hash = hash('sha512',$user->getPassword());
+        $req = $this->db->prepare('SELECT COUNT(*) AS existe FROM users WHERE pseudo = :pseudo AND password = :password ');
+        $req->bindValue(':pseudo' , $user->getPseudo());
+        $req->bindValue(':password', $hash);
+        $req->execute();
+        $password = $req->fetch(\PDO::FETCH_ASSOC);
+        $ConnectUser = $password['existe'];
+        return $ConnectUser;     
     }
+
+    public function compareMail(\entity\User $user)
+    {
+        $hash = hash('sha512',$user->getEmail());
+        $req = $this->db->prepare('SELECT COUNT(*) AS valide FROM users WHERE uniqueid = :mail');
+        $req->bindValue(':mail', $hash);
+        $req->execute();
+        $mail = $req->fetch(\PDO::FETCH_ASSOC);
+        $result = $mail['valide'];
+        return $result;
+    }
+
     // à voir et modifié
-    public function updatePassword(\User $newpassword)
+    public function updatePassword(\entity\User $user)
     {
         $req = $this->db->prepare('UPDATE users SET password = :password, pseudo =>:pseudo');
         $req->bindValue(':pseudo',$user->getPseudo());
-        $req->bindValue(':password',$user->getPseudo());
+        $req->bindValue(':password',$user->getPseudo()); 
+        $req->execute();  
+    }
+
+    public function compareAltid(\entity\User $user)
+    {
         
+        $req = $this->db->prepare('SELECT COUNT(*) AS valide FROM users WHERE altid = :altid');
+        $req->bindValue(':altid', $hash);
+        $req->execute();
+        $altid = $req->fetch(\PDO::FETCH_ASSOC);
+        $result = $mail['valide'];
+        return $result;
+    }
+
+    public function updateAltid($id)
+    {
+        $req = $this->db->prepare('UPDATE users SET altid = :altid');
+        $req->bindValue(':pseudo',$id);
+        $req->execute(); 
     }
 
 }

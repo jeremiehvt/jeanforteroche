@@ -15,6 +15,22 @@ class ConnexionController
 	{	
 		$UserManager = new \model\UserManager($db);
 		$ConnectUser = $UserManager->ConnectUser($user);
+
+		if ($ConnectUser == 1)
+        {
+      
+            
+            $_SESSION['user'] = $user->getPseudo();
+            header('location: index.php?admin=home');
+            exit();
+        }
+
+        elseif ($ConnectUser == 0 )
+        {
+            
+            throw new \Exception('votre mot de passe ou votre pseudo est incorrect');
+            
+        }
 	}
 
 	/**
@@ -27,10 +43,5 @@ class ConnexionController
 		$_SESSION = array();
 		session_destroy();
 		header('location: index.php');
-	}
-
-	public function updatePassword()
-	{
-
 	}
 }

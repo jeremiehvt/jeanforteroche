@@ -12,7 +12,7 @@ require ('entity/Autoloader.php');
 \model\Autoloader::register();
 \entity\Autoloader::register();
 
-$db = model\DBFactory::dbConnect();
+$db = \model\DBFactory::dbConnect();
 
 try
 {
@@ -91,6 +91,47 @@ try
 			{
 				throw new \Exception('Veuillez remplir tout les champs de saisie de texte');
 			}
+		}
+
+		elseif ($_GET['action'] === 'forgotpassword') 
+		{
+			if (!empty($_POST['password']))
+			{
+				$user = new \entity\User(['password'=>$_POST['password']]);
+				$update = new \controler\UserController();
+				$update->updatePassword($db, $user);
+			}
+
+			elseif (!empty($_POST['email']))
+			{
+				$user = new \entity\User(['email'=>$_POST['email']]);
+				$update = new \controler\UserController();
+				$update->verifyMail($db, $user);
+			}
+
+			else
+			{
+				$view = new \controler\ViewController();
+				$view->forgotpassword();
+			}
+			
+		}
+
+		elseif ($_GET['action'] === 'update') 
+		{
+			if ((!empty($_POST['altid'])) 
+			{
+				$user = new \entity\User(['altid'=>$_POST['altid']]);
+				$update = new \controler\UserController();
+				$update->verifyAltid($db, $user);
+			}
+
+			else
+			{
+				$view = new \controler\ViewController();
+				$view->controlid();
+			}
+			
 		}
 
 		elseif (!is_string($_GET['action'])) 

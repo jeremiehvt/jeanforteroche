@@ -79,6 +79,8 @@ class CommentManager
 		$req = $this->db->prepare('INSERT INTO reportcomments(id_comment) VALUES (:idcoment)');
 		$req->bindValue(':idcoment',$report->getIdcomment());
 		$req->execute();
+		$reportComment = $req->execute();
+		return $reportComment;
 		
 	}
 

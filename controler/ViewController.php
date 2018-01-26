@@ -46,7 +46,7 @@ class ViewController
 
 	/**
 	* this method manage post to display on the user postpage
-	* this require view
+	* require a view
 	*/
 	public function allposts($db)
 	{
@@ -56,9 +56,41 @@ class ViewController
 		require ('view/frontend/allposts.php');
 	}
 
+	/**
+	* this method manage post to display on the user postpage
+	* require a view
+	*/
 	public function connexion()
 	{
 		require ('view/frontend/connexion.php');
+	}
+
+	/**
+	* this method manage post to display on the user postpage
+	* require a view
+	*/
+	public function forgotpassword()
+	{
+		require ('view/frontend/forgotpassword.php');
+	}
+
+	/**
+	* this method manage post to display on the user postpage
+	* require a view
+	*/
+	public function controlid()
+	{
+		require ('view/frontend/controlid.php'); 
+	}
+
+	/**
+	* this method manage post to display on the user postpage
+	* require a view
+	*/
+	public function newpassword()
+	{
+
+		require ('view/frontend/newpassword.php'); 
 	}
 
 	//ADMIN 
