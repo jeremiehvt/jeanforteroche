@@ -16,10 +16,12 @@
 
       <aside class="col-md-2" id="author">
         <h3 class="headers">L'auteur</h3>
-        <p>la bio de l'auteur</p>
-        <p>bonjour je m'appelle jean forteroche.</p>
-   
-        
+        <?php
+          foreach ($user as $data) 
+            {?>
+              <p><?=htmlspecialchars_decode(nl2br($data->getBio()));?></p>
+            <?php }
+        ?>
       </aside>
 
       <section class="col-md-8">

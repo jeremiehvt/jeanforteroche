@@ -22,6 +22,9 @@ class ViewController
 
 	    $CommentManager = new \model\CommentManager($db);
 	    $allcomments = $CommentManager->getAllcomments();
+
+	    $UserManager = new \model\UserManager($db);
+	    $user = $UserManager->getInfos();
 	    
 	   	require('view/frontend/home.php');
 	}
@@ -134,5 +137,25 @@ class ViewController
 		$post = $PostManager->getPost($post);
 
 		require ('view/backend/editpost.php');
+	}
+
+	/**
+	* this method display profil admin view
+	*/
+	public function profil($db)
+	{
+		$UserManager = new \model\UserManager($db);
+	    $user = $UserManager->getInfos();
+		require('view/backend/profil.php'); 
+	}
+
+	/**
+	* this method display setprofil admin view
+	*/
+	public function editProfil($db)
+	{
+		$UserManager = new \model\UserManager($db);
+	    $user = $UserManager->getInfos();
+		require('view/backend/setprofil.php'); 
 	}
 }

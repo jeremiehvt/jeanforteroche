@@ -5,7 +5,49 @@ namespace controler;
  * manages data to send to the manager
  */
 class UserController
-{	
+{
+
+	/**
+	* UserControlle
+	* manages data to send an object to the manager
+	*/
+	public function updateGenerals($db, \entity\User $user)
+	{
+		$UserManager = new \model\UserManager($db);
+		$updateGenerals = $UserManager->setGenerals($user);
+
+		if ($updateGenerals === FALSE)
+        {
+            throw new \Exception('Veuillez vérifier vos informations');
+        }
+
+        else
+        {
+        	header('location: index.php?admin=profil');
+            exit();
+        }
+	}
+
+	/**
+	* UserController
+	* manages data to send an object to the manager
+	*/
+	public function updateAllinfos($db, \entity\User $user)
+	{
+		$UserManager = new \model\UserManager($db);
+		$updateAllinfos = $UserManager->setAllinfos($user);
+
+		if ($updateAllinfos === FALSE)
+        {
+            throw new \Exception('Veuillez vérifier vos informations');
+        }
+
+        else
+        {
+        	header('location: index.php?admin=profil');
+            exit();
+        }
+	}
 
 	/**
 	* this method send an object with the new password 
@@ -116,7 +158,7 @@ class UserController
 			//==========
 			$message.= $passage_ligne."--".$boundary.$passage_ligne;
 			//=====Ajout du message au format HTML
-			$message.= "Content-Type: text/html; charset=\"ISO-8859-1\"".$passage_ligne;
+			$message.= "Content-Type: text/html; charset=\"utf-8\"".$passage_ligne;
 			$message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
 			$message.= $passage_ligne.$message_html.$passage_ligne;
 			//==========

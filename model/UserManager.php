@@ -17,13 +17,49 @@ class UserManager
     }
 
     public function setDB($db)
-    
     {  
-       $this->db = $db; 
+       $this->db = $db;
     }
 
+    public function getInfos()
+    {
+        $req = $this->db->query('SELECT * FROM users');
+        $req->setFetchMode(\PDO::FETCH_PROPS_LATE|\PDO::FETCH_CLASS,'\entity\User');
+        $user = $req->fetchall();
+        return $user;
+    }
 
-   public function ConnectUser(\entity\User $user)
+    public function setGenerals (\entity\User $user)
+    {   
+        $hash = hash('sha512', $user->getEmail());
+        $req = $this->db->prepare('UPDATE users SET uniqueid = :uniqueid , pseudo = :pseudo , email = :email , bio = :bio WHERE id = :id');
+        $req->bindvalue(':pseudo',$user->getPseudo());
+        $req->bindvalue(':email',$user->getEmail());
+        $req->bindvalue(':uniqueid',$hash);
+        $req->bindvalue(':bio',$user->getBio());
+        $req->bindvalue(':id',$user->getID());
+        $req->execute();
+        $generals = $req;
+        return $generals;
+    }
+
+    public function setAllinfos(\entity\User $user)
+    {   
+        $hashmail = hash('sha512', $user->getEmail());
+        $hashpass = hash('sha512', $user->getPassword());
+        $req = $this->db->prepare('UPDATE users SET uniqueid = :uniqueid , pseudo = :pseudo , email = :email , password = :password , bio = :bio WHERE id = :id');
+        $req->bindvalue(':pseudo',$user->getPseudo());
+        $req->bindvalue(':email',$user->getEmail());
+        $req->bindvalue(':uniqueid',$hashmail);
+        $req->bindvalue(':password',$hashpass);
+        $req->bindvalue(':bio',$user->getBio());
+        $req->bindvalue(':id',$user->getID());
+        $req->execute();
+        $allinfos = $req;
+        return $allinfos;
+    }
+
+    public function ConnectUser(\entity\User $user)
     {
         $hash = hash('sha512',$user->getPassword());
         $req = $this->db->prepare('SELECT COUNT(*) AS existe FROM users WHERE pseudo = :pseudo AND password = :password ');

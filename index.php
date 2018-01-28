@@ -220,6 +220,39 @@ try
 				}	
 			}
 
+			elseif ($_GET['admin'] === 'updateprofil') 
+			{
+				if (isset($_GET['id'])) 
+				{
+					if (empty($_POST['password'])) 
+					{
+						$user = new \entity\User(['id'=>$_GET['id'],'pseudo'=>$_POST['pseudo'], 'email'=>$_POST['email'], 'bio'=>$_POST['bio']]);
+						$UserController = new \controler\UserController();
+						$UserController->updateGenerals($db, $user);
+					}
+
+					elseif (!empty($_POST['password'])) 
+					{
+						$user = new \entity\User(['id'=>$_GET['id'],'pseudo'=>$_POST['pseudo'], 'email'=>$_POST['email'], 'password'=>$_POST['password'], 'bio'=>$_POST['bio']]);
+						$UserController = new \controler\UserController();
+						$UserController->updateAllinfos($db, $user);
+					}	
+				}
+				
+				else
+				{
+					$view = new \controler\ViewController();
+					$view->editProfil($db);
+				}
+				
+			}
+
+			elseif ($_GET['admin'] === 'profil') 
+			{
+				$view = new \controler\ViewController();
+				$view->profil($db);
+			}
+
 			elseif ($_GET['admin'] === 'addpost') 
 			{
 				if (!empty($_POST['title']) && !empty($_POST['post'])) 

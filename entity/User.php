@@ -11,6 +11,7 @@ class User
 	protected $pseudo;
 	protected $email;
 	protected $password;
+	protected $bio;
 	
 	function __construct($donnee=[])
 	{
@@ -59,6 +60,10 @@ class User
 		return $this->password;
 	}
 
+	public function getBio()
+	{
+		return $this->bio;
+	}
 	//setters
 
 	public function setID($id)
@@ -87,6 +92,11 @@ class User
 	
 		$this->password = $password;
 	}
+
+	public function setBio($bio)
+	{
+		$this->bio = $bio;
+	} 
 
 	
 }
