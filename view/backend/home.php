@@ -63,7 +63,7 @@
                 <?php
                 foreach ($reportcomments as $data)
                   { ?>
-                    <li class="list-group-item"><strong>n° <?=htmlspecialchars($data->getIdcomment())?></strong><a class="btn btn-danger btn-xs pull-right" href="index.php?admin=deletereport&amp;id=<?=$data->getIdcomment()?>">supprimer</a></li>
+                    <li class="list-group-item"><strong>n° <?=htmlspecialchars($data->getIdcomment())?></strong></li>
 
                   <?php }
                 ?>

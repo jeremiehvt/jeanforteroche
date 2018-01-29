@@ -46,6 +46,8 @@ class CommentController
 
 			else
 			{
+			
+
 				header('location: index.php?');
 				exit();
 			}
@@ -56,30 +58,22 @@ class CommentController
 	//ADMIN
 
 	/**
-	* this method send data to the model to delete comment
+	* this method send data to the model to delete comment and a report comment
 	*
 	* this method redirect to adminhomepage
 	*/
-	public function deleteComment($db, \entity\Coment $coment)
+	public function deleteComment($db, \entity\Coment $coment, \entity\ReportComment $reportcoment)
 	{
 		$CommentManager = new \model\CommentManager($db);
 		$deleteComment = $CommentManager->deleteComment($coment);
+
+		$CommentManager = new \model\CommentManager($db);
+		$deleteReportcomment = $CommentManager->deleteReportcomment($reportcoment);
 		
 
 		header('location: index.php?admin=home');
 		exit();
 	}
 
-	/**
-	* this method send data to the model to delete reportcomment
-	*
-	* this method redirect to adminhomepage
-	*/
-	public function deleteReportcomment($db, \entity\ReportComment $reportcoment)
-	{
-		$CommentManager = new \model\CommentManager($db);
-		$deleteReportcomment = $CommentManager->deleteReportcomment($reportcoment);
-		header('location: index.php?admin=home');
-		exit();
-	}
+	
 }

@@ -173,8 +173,9 @@ try
 				if (!empty($_GET['id'])) 
 				{
 					$coment = new \entity\Coment(['id'=>$_GET['id']]);
+					$reportcoment = new \entity\ReportComment(['idcomment'=>$_GET['id']]);
 					$admin = new \controler\CommentController();
-					$admin->deleteComment($db, $coment);
+					$admin->deleteComment($db, $coment, $reportcoment);
 				}
 
 				else
@@ -184,20 +185,7 @@ try
 				
 			}
 
-			elseif ($_GET['admin'] === 'deletereport')
-			{
-				if (!empty($_GET['id'])) 
-				{
-					$reportcoment = new \entity\ReportComment(['idcomment'=>$_GET['id']]);
-					$admin = new \controler\CommentController();
-					$admin->deleteReportcomment($db, $reportcoment);
-				}
-
-				else
-				{
-					throw new \Exception("l'url doit contenir un identifiant valide");
-				}	
-			}
+		
 
 			elseif ($_GET['admin'] === 'newpost') 
 			{
