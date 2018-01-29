@@ -59,18 +59,23 @@ class UserController
 		$altid = new \model\UserManager($db);
 		$confirmaltid = $altid->compareAltid($user);
 
-		if ($confirmaltid === FALSE)
+		if ($confirmaltid == 1)
         {
-      
-            
-            throw new \Exception('Veuillez saisir un identifiant valide');
+        	
+			$viewcontroller = new \controler\ViewController();
+			$viewcontroller->newpassword();
+
+			$id = mt_rand();
+
+			$altid = new \model\UserManager($db);
+			$newaltid = $altid->updateAltid($id);
+      		
         }
 
         else 
         {
+            throw new \Exception('Veuillez saisir un identifiant valide');
             
-            $viewcontroller = new \controler\ViewController();
-            $viewcontroller->newpassword();
         }
 	}
 
@@ -85,6 +90,11 @@ class UserController
 		$password = new \model\UserManager($db);
 		$newpassword = $password->updatePassword($user);
 
+		$id = mt_rand();
+
+		$altid = new \model\UserManager($db);
+		$newaltid = $altid->updateAltid($id);
+
 		if ($newpassword === FALSE)
         {
       
@@ -94,6 +104,7 @@ class UserController
 
         else 
         {
+
             
             header('location: index.php?action=connexion');
             exit();
@@ -109,68 +120,34 @@ class UserController
 	public function verifyMail($db, \entity\User $user)
 	{
 
-		$mail = new \model\UserManager($db);
-		$result = $mail->compareMail($user);
+		$VerifyMail = new \model\UserManager($db);
+		$result = $VerifyMail->compareMail($user);
 
 		if ($result == 1) 
 		{
+			require_once 'vendor/mail/Autoloader.php';
+			\vendor\mail\Autoloader::register();
+
 			$id = mt_rand();
 
 			$altid = new \model\UserManager($db);
 			$newaltid = $altid->updateAltid($id);
 
-			$mail = 'jeremiehvt@gmail.com'; // Déclaration de l'adresse de destination.
-			if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.
+			$UserManager = new \model\UserManager($db);
+			$user = $UserManager->getInfos();
+
+			foreach ($user as $author) 
 			{
-				$passage_ligne = "\r\n";
+				$mail = new \vendor\mail\SendMail(['messageTxt'=>'recovery_password','messageHtml'=>'recovery_password','mail'=>$author->getEmail(),'altid'=>$author->getAltid(),'subject'=>'nouveau mot de passe www.jeanforteroche.ovh', 'pseudo'=>$author->getpseudo()]);
+				
 			}
-			else
-			{
-				$passage_ligne = "\n";
-			}
-			//=====Déclaration des messages au format texte et au format HTML.
-			$message_txt = file_get_contents('vendor/mail/message_txt.txt');
-			$message_html = file_get_contents('vendor/mail/message_html.php').$id;
-			//==========
-			 
-			//=====Création de la boundary
-			$boundary = "-----=".md5(rand());
-			//==========
-			 
-			//=====Définition du sujet.
-			$sujet = "réinitialisation de votre mot de passe";
-			//=========
-			 
-			//=====Création du header de l'e-mail.
-			$header = "From: \"jeremiehvt\"<jeremiehvt@gmail.com>".$passage_ligne;
-			$header.= "Reply-to: \"jeremiehvt\" <jeremiehvt@gmail.com>".$passage_ligne;
-			$header.= "MIME-Version: 1.0".$passage_ligne;
-			$header .= "X-Priority: 1".$passage_ligne;
-			$header.= "Content-Type: multipart/alternative;".$passage_ligne." boundary=\"$boundary\"".$passage_ligne;
-			//==========
-			 
-			//=====Création du message.
-			$message = $passage_ligne."--".$boundary.$passage_ligne;
-			//=====Ajout du message au format texte.
-			$message.= "Content-Type: text/plain; charset=\"utf-8\"".$passage_ligne;
-			$message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
-			$message.= $passage_ligne.$message_txt.$passage_ligne;
-			//==========
-			$message.= $passage_ligne."--".$boundary.$passage_ligne;
-			//=====Ajout du message au format HTML
-			$message.= "Content-Type: text/html; charset=\"utf-8\"".$passage_ligne;
-			$message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
-			$message.= $passage_ligne.$message_html.$passage_ligne;
-			//==========
-			$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
-			$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
-			//==========
-			 
-			//=====Envoi de l'e-mail.
-			mail($mail,$sujet,$message,$header);
-			//==========
+
+			$mail->sendMail();
 
 			header('location: index.php');
+			exit();
+
+			
 		}
 
 		else
