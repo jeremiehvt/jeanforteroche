@@ -3,12 +3,18 @@
 
 <?php ob_start();?>
 
-<div class="jumbotron" id="contact">
+<div class="jumbotron" id="work">
+  <div class="container">
+  <h1>Ajouter un article</h1>
+  
+  </div>
+</div>
+
           <div class="container">
-                <div class="raw">
+                <div class="row">
                   <div class="col-md-12">
                       <form action="index.php?admin=addpost" method="POST" class="form-horizontal col-md-10">
-                       <h3 class="form-group">Ajouter un article</h3>
+                      
                        
                         <div class="row">
                           <div class="form-group">
@@ -24,18 +30,24 @@
                             <div class="col-md-8">
                               <textarea type="text" name="post" id="post" class="form-control" required>
                               </textarea>
+                              <p class="help-block">Vous pouvez agrandir la fenêtre de texte</p>
                             </div>
                           </div>
                         </div>
 
                         <div class="form-group">
-                          <input type="submit" class="btn btn-primary btn-sm" value="publier">
+                          <div class="row">
+                            <div class="col-md-2">
+                              <input type="submit" class="btn btn-primary btn-sm btn-block" value="publier">
+                            </div>
+                          </div>
+                          
                         </div>
                       </form>
                     </div>
                   </div>
             </div>
-          </div>
+
 
 <?php $content = ob_get_clean();?>
 

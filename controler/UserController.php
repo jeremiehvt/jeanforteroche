@@ -23,7 +23,7 @@ class UserController
 
         else
         {
-        	header('location: index.php?admin=profil');
+        	header('location: index.php?admin=updateprofil');
             exit();
         }
 	}
@@ -44,7 +44,7 @@ class UserController
 
         else
         {
-        	header('location: index.php?admin=profil');
+        	header('location: index.php?admin=updateprofil');
             exit();
         }
 	}

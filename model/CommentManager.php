@@ -34,6 +34,18 @@ class CommentManager
 
 	/**
 	* 
+	* this method select last comments
+	*/
+	public function getLastComments()
+	{
+		$req = $this->db->query('SELECT id, comment,  DATE_FORMAT(date_comment, \'%d/%m/%y à %Hh%i\') AS date_comment  FROM comments ORDER BY date_comment DESC LIMIT 0,10');
+		$req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, '\entity\Coment');
+		$allcomments = $req->fetchall();
+		return $allcomments;
+	}
+
+	/**
+	* 
 	* this method select all comments from a post
 	*/
 	public function getComments(\entity\coment $coment)

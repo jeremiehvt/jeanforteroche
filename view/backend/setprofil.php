@@ -2,13 +2,14 @@
 
 <?php ob_start();?>
 
-        <div class="container">
-          <div class="raw">
-            <div class="col-md-12"></div>
-          </div>
-        </div>
+        <div class="jumbotron" id="work">
+  <div class="container">
+  <h1>Modifier votre profil</h1>
+  
+  </div>
+</div>
 
-        <div class="jumbotron" id="contact">
+        
           <div class="container">
                 <div class="raw">
                   <div class="col-md-12">
@@ -19,10 +20,6 @@
                         
                         <div class="row">
                           <div class="col-md-12">
-                            <h3 class="form-group col-md-12">Votre profil</h3>
-                            
-                              
-                            
 
                                 <div class="raw">
                                   <div class="col-md-6">
@@ -36,14 +33,14 @@
                                     </div>
 
                                     <div class="form-group col-md-12">
-                                      <label for="pseudo" class="col-md-3">email</label>
+                                      <label for="pseudo" class="col-md-3 ">email</label>
                                       <div class="col-md-9">
                                         <input type="email" name="email" id="email" class="form-control" value="<?=htmlspecialchars($data->getEmail());?>" required>
                                       </div>
                                     </div>
 
                                     <div class="form-group col-md-12">
-                                      <label for="password" class="col-md-3">mot de passe</label>
+                                      <label for="password" class="col-md-3 ">mot de passe</label>
                                       <div class="col-md-9">
                                         <input type="password" name="password" id="password" class="form-control" >
                                       </div>
@@ -66,7 +63,12 @@
                                 </div>
 
                                 <div class="form-group col-md-12">
-                            <input type="submit" class="btn btn-primary btn-sm" value="valider">
+                                  <div class="row">
+                                    <div class="col-md-2">
+                                      <input type="submit" class="btn btn-primary btn-sm btn-block" value="valider">
+                                    </div>
+                                  </div>
+                            
                             </div>
 
 
@@ -82,7 +84,7 @@
                     </div>
                   </div>
             </div>
-          </div>
+
 
 <?php $content = ob_get_clean();?>
 

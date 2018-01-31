@@ -1,13 +1,13 @@
 
 
-      <footer class="container-fluid" id="adminblock">
-          <div class="raw">
+      <footer class="container-fluid" id="footer">
+          <div class="row">
             <div class="col-md-12">
               <div class="container">
 
-                <div class="raw">
-                  <div class="col-md-2">
-                    <h4 id="admin">Administration</h4>
+                <div class="row">
+                  <div class="col-md-2" >
+                    <h4 id="admintext">Administration</h4>
                       <ul class="list-unstyled">
                         <li><a class="btn btn-default btn-sm" href="index.php?action=connexion">Connexion</a></li>
                       </ul>

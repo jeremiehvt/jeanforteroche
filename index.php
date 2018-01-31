@@ -41,7 +41,7 @@ try
 	        	$post = new \entity\Post(['id'=>$_GET['id']]);
 	        	$coment = new \entity\Coment(['idpost' => $_GET['id']]);
 	            $view = new \controler\ViewController();
-				$view->posts($db, $post, $coment);
+				$view->posts($db, $post, $coment, $_GET['action']);
 	        }
 
 	        elseif (empty($_GET['id']) OR !is_int($_GET['id']) OR $_GET['id'] === 0) 
@@ -68,7 +68,7 @@ try
 		elseif ($_GET['action']==='allposts')
 		{
 			$view = new \controler\ViewController();
-			$view->allposts($db);
+			$view->allPosts($db, $_GET['action']);
 		}
 
 		elseif ($_GET['action'] === 'connexion') 
@@ -106,7 +106,7 @@ try
 			else
 			{
 				$view = new \controler\ViewController();
-				$view->forgotpassword();
+				$view->forgotPassword();
 			}
 	
 		}
@@ -152,9 +152,33 @@ try
 				$view->adminHome($db);
 			}
 
+			elseif ($_GET['admin'] === 'adminallposts')
+			{
+				
+				$ViewController = new \controler\ViewController();
+				$ViewController->allPosts($db,$_GET['admin']);
+			}
+
+			elseif ($_GET['admin'] === 'adminposts')
+			{
+				
+				if (!empty($_GET['id']) && $_GET['id'] > 0) 
+	        {	
+	        	$post = new \entity\Post(['id'=>$_GET['id']]);
+	        	$coment = new \entity\Coment(['idpost' => $_GET['id']]);
+	            $view = new \controler\ViewController();
+				$view->posts($db, $post, $coment, $_GET['admin']);
+	        }
+
+	        elseif (empty($_GET['id']) OR !is_int($_GET['id']) OR $_GET['id'] === 0) 
+	        {
+	        	throw new \Exception('Une erreur est survenue');
+	        }
+			}
+
 			elseif ($_GET['admin'] === 'deletepost') 
 			{
-				if (!empty($_GET['id'])) 
+				if (!empty($_GET['id']))
 				{	
 					$post = new \entity\Post(['id'=>$_GET['id']]);
 					$admin = new \controler\PostController();
@@ -190,7 +214,7 @@ try
 			elseif ($_GET['admin'] === 'newpost') 
 			{
 				$view = new \controler\ViewController();
-				$view->newpost();
+				$view->newPost();
 			}
 
 			elseif ($_GET['admin'] === 'editpost') 
@@ -199,7 +223,7 @@ try
 				{
 					$post = new \entity\Post(['id'=>$_GET['id']]);
 					$view = new \controler\ViewController();
-					$view->editpost($db, $post);
+					$view->editPost($db, $post);
 				}
 
 				else
@@ -235,11 +259,7 @@ try
 				
 			}
 
-			elseif ($_GET['admin'] === 'profil') 
-			{
-				$view = new \controler\ViewController();
-				$view->profil($db);
-			}
+			
 
 			elseif ($_GET['admin'] === 'addpost') 
 			{

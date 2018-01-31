@@ -12,22 +12,24 @@ header
 /* footer*/
 footer
 {
-	margin-top: 50px;
-	
+	margin-top: 230px;
+	height: 200px;
+	padding-top: 50px
 }
 
-#contact
+#admintext
 {
-	margin: 130px 0 130px 0;
+	color: lightgrey;
 }
 
-.date
+
+#footer
 {
-	color: #6d6d6d;
+	background-color:  #222;
 }
-.headers
+#creditblock
 {
-	color:#adadad;
+	background-color: darkgrey;
 }
 
 #credit 
@@ -38,84 +40,157 @@ footer
 		
 		text-align: center;
 		background-color: white;
+
+		background-color: lightgrey;
 	}
 
 #alaska
 {
-	background-image: url("../images/un.jpg");
+	background-image: url("../images/trois.jpg");
 	height:530px;
+	padding-top: 150px
 }
 
-
-
-#firstpost, #selectedpost
+#work
 {
-	background-color: #282828;
-	padding: 5px 5px 15px 20px;
-	color:white;
-
+	padding-top: 150px;
+	margin-bottom: 120px;
+	height: 400px;
+	background-image: url("../images/cinq.jpg");
+	color: lightgrey;
 }
 
-#selectedpostpage
+#workflow
 {
-	margin-top: 120px;
-}
-
-#lastposts, #otherlastpost, #allposts
-{
-	margin-right: 30px;
-	margin-top: 20px;
-	padding-left: 15px;
-	border-color: #efefef;
+	border-radius: 0px;
+	background-color: #669999;
+	color: white;
 	
 }
 
-#lastparagraphe, #firstparagraphe, #allparagraphe, #otherparagraphe
+#actuality
 {
-	overflow: hidden;
-	word-break: break-word;
-	height: 200px;
+	height: 120px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	margin-top: 60px;
+	border-radius: 0px;
+	background-color: #006666;
+	color: white;
 }
 
 
-
-#posts, #otherposts, #all
-{
-	margin-top: 40px;
-	background-color: #efefef;
-	padding: 5px 5px 15px 20px;
-}
-#all
-{
-	margin-top: 100px;
-	margin-bottom: 40px;
-}
-
-#otherposts
-{
-
-	margin-top: 50px;
-
-}
-
-#hometitle, #homesubtitle
+#hometitle
 {
 	color: white;
 }
 
-#adminblock
-{
-	padding: 20px 0px 20px 0px;
-	background-color: #222;
-}
-
-#admin
+#homesubtitle
 {
 	color: lightgrey;
 }
 
-#inscription
+#headers
 {
+	padding-top: 80px;
+	margin-bottom: 120px;
+	height: 400px;
+	background-image: url("../images/quatre.jpg");
 	
-	margin-top: 50px;
+}
+
+#headerseparator
+{
+	margin: 80px 0 80px 0;
+	height: 180px;
+	background-color: white;
+}
+
+#separator
+{
+	margin: 80px 0 80px 0;
+	height: 250px;
+	background-color: #669999;
+}
+
+#contact
+{
+	background-color: #669999;
+	padding-bottom: 90px;
+	color: white;
+}
+
+.btn
+{
+	border-radius: 0px;
+	
+}
+
+.btn-primary
+{
+	background-color: #006666;
+	border: none;
+
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #669999;
+    border: none;
+    
+}
+
+.btn-danger
+{
+	border: none;
+}
+
+.btn-group-vertical
+{
+	border: none;
+}
+
+.btn-group-vertical > .btn:first-child:not(:last-child) {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.btn-group-vertical > .btn:last-child:not(:first-child) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.label , .panel , .table
+{
+	border-radius: 0px;
+
+}
+
+.label
+{
+	padding: .2em .6em .2em;
+    font-size: 60%;
+    background-color: #006666;
+}
+
+
+.form-control
+{
+
+	border-radius: 0px;
+}
+
+.input.btn
+{
+	border-color: black;
+}
+
+#pass
+{
+	color: #006666;
 }

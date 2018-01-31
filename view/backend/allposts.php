@@ -5,16 +5,17 @@
 
 <div class="jumbotron" id="headers">
   <div class="container">
-    <h1>Les aventures de Jean Forteroche</h1>
+    <h1>Votre bibliothèque</h1>
   </div>
 </div>
 
 <section class="container">
   <div class="row">
+
       <div class="col-md-8">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="panel-title"><h3>Tous les billets</h3></div>
+            <div class="panel-title"><h3>Tous vos billets</h3></div>
           </div>
           <table class="table table-bordered table-striped">
               <thead>
@@ -47,8 +48,8 @@
                       <h4><?=htmlspecialchars($data->getTitle())?> </h4>
                     </td>
                     <td class="col-md-5">
-                      <div>
-                      <?php
+                      <div >
+                       <?php
                         $txt= htmlspecialchars_decode(nl2br($data->getPost()));
                         $tab=str_word_count($txt,2);
                         $mot=array_keys($tab);
@@ -64,7 +65,8 @@
                       </div>
                     </td>
                     <td class="col-md-1">
-                      <div class="btn-group"><a class="btn btn-primary" href="index.php?action=post&amp;id=<?=$data->getID()?>">lire</a></div>
+                      <div class="btn-group-vertical"><a class="btn btn-primary btn-sm" href="index.php?admin=adminposts&amp;id=<?=$data->getID()?>">lire</a><a class="btn btn-primary btn-sm" href="index.php?admin=editpost&amp;id=<?=$data->getID()?>">modifier</a>
+                          <a class="btn btn-default btn-danger btn-sm" href="index.php?admin=deletepost&amp;id=<?=$data->getID()?>">supprimer</a></div>
                     </td>
                   </tr>
 
@@ -75,7 +77,7 @@
         </div>
       </div>
 
-      <aside class="col-md-4">
+      <aside class="col-md-2">
         
 
         <div class="panel panel-default">
@@ -88,7 +90,7 @@
                   { ?>
                     <div class="list-group-item">
 
-                      <h5><span class="label label-default"></span><em class="date">le <?=htmlspecialchars($data->getDatecomment())?></em></br><?=htmlspecialchars(nl2br($data->getComment()))?><a class="btn btn-danger btn-xs pull-right" href="index.php?action=report&amp;id=<?=$data->getID()?>">signaler</a></h5><div></div>
+                      <h4><span class="label label-default">n°<?=htmlspecialchars($data->getID())?></span></h4><h5><em class="date">le <?=htmlspecialchars($data->getDatecomment())?></em></br><?=htmlspecialchars(nl2br($data->getComment()))?></h5><div><a class="btn btn-danger btn-xs" href="index.php?admin=deletecomment&amp;id=<?=$data->getID()?>">supprimer</a></div>
 
                     </div>
                   <?php }
@@ -101,7 +103,31 @@
               
       </aside>
 
-       
+       <aside class="col-md-2">
+              
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h5 class="panel-title">commentaires signalés</h5>
+                </div>
+
+                 <div class="list-group">
+                
+                <?php
+                foreach ($reportcomments as $data)
+                  { ?>
+                    <div class="list-group-item "><h4><span class="label label-default">n°<?=htmlspecialchars($data->getIdcomment())?></span></h4></div>
+
+                  <?php }
+                ?>
+              </div>
+
+              <div class="panel-footer">
+                 
+              </div>
+                
+            </div>
+
+      </aside>
 
 
 </div>

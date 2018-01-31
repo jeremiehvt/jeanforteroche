@@ -2,15 +2,15 @@
 
 <?php ob_start();?>
 
-        <div class="container">
-          <div class="raw">
+        <div class="jumbotron" id="headerseparator">
+          <div class="container">
             <div class="col-md-12"></div>
           </div>
         </div>
 
         <div class="jumbotron" id="contact">
           <div class="container">
-                <div class="raw">
+                <div class="row">
                   <div class="col-md-12">
                       <form action="index.php?action=connectuser" method="POST" class="form-horizontal col-md-10">
                        <h3 class="form-group">Connexion</h3>
@@ -24,7 +24,7 @@
 
                             <label for="password" class="col-md-1">mot de passe</label>
                             <div class="col-md-3">
-                              <input type="password" name="password" id="password" class="form-control" required><a href="index.php?action=forgotpassword" class="help-block">j'ai oublié mon mot de passe</a>
+                              <input type="password" name="password" id="password" class="form-control" required><a href="index.php?action=forgotpassword" class="help-block" id="pass">j'ai oublié mon mot de passe</a>
                             </div>
                           </div>
                         </div>

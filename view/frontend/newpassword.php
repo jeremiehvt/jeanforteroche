@@ -2,15 +2,15 @@
 
 <?php ob_start();?>
 
-        <div class="container">
-          <div class="raw">
+        <div class="jumbotron" id="headerseparator">
+          <div class="container">
             <div class="col-md-12"></div>
           </div>
         </div>
 
         <div class="jumbotron" id="contact">
           <div class="container">
-                <div class="raw">
+                <div class="row">
                   <div class="col-md-12">
                       <form action="index.php?action=update" method="POST" class="form-horizontal col-md-10">
                        <h4 class="form-group">Veuillez saisir votre nouveau mot de passe</h4>

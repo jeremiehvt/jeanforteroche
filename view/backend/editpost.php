@@ -3,12 +3,19 @@
 
 <?php ob_start();?>
 
-<div class="jumbotron" id="contact">
+<div class="jumbotron" id="work">
+  <div class="container">
+  <h1>Modifier votre article</h1>
+  
+  </div>
+</div>
+
+
           <div class="container">
                 <div class="raw">
                   <div class="col-md-12">
                       <form action="index.php?admin=updatepost&id=<?=$_GET['id']?>" method="POST" class="form-horizontal col-md-10">
-                       <h3 class="form-group">Modifier votre article</h3>
+                       
                           <?php 
                           foreach ($post as $data)
                           {?>
@@ -34,6 +41,7 @@
                                             
                                           
                                         </textarea>
+                                        <p class="help-block">Vous pouvez agrandir la fenêtre de texte</p>
                                       </div>
                                     </div>
                                   </div>
@@ -44,13 +52,17 @@
 
 
                         <div class="form-group">
-                          <input type="submit" class="btn btn-primary btn-sm" value="publier">
+                          <div class="row">
+                            <div class="col-md-2">
+                              <input type="submit" class="btn btn-primary btn-sm btn-block" value="publier">
+                            </div>
+                          </div>
                         </div>
                       </form>
                     </div>
                   </div>
             </div>
-          </div>
+
 
 <?php $content = ob_get_clean();?>
 

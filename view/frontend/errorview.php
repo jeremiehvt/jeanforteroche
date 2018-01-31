@@ -2,15 +2,16 @@
 
 <?php ob_start();?>
 
-        <div class="container">
-          <div class="raw">
+        
+        <div class="jumbotron" id="headerseparator">
+          <div class="container">
             <div class="col-md-12"></div>
           </div>
         </div>
 
         <div class="jumbotron" id="contact">
           <div class="container">
-                <div class="raw">
+                <div class="row">
                   <div class="col-md-12">
                       
                        

@@ -3,9 +3,9 @@
 
 <?php ob_start();?>
 
-<div class="jumbotron" id="headers">
+<div class="jumbotron" id=headers>
   <div class="container">
-    <h1>Les aventures de Jean Forteroche</h1>
+    <h1>Votre bibliothèque</h1>
   </div>
 </div>
 
@@ -15,7 +15,7 @@
 
     <div class="col-md-6">
       <?php
-      foreach ($post as $select)
+      foreach ($post as $select) 
       { ?>
 
         <div class="panel panel-default">
@@ -29,14 +29,9 @@
             </div>
 
             <div class="panel-footer">
+                <div class="btn-group "><a class="btn btn-primary btn-sm" href="index.php?admin=editpost&amp;id=<?=$select->getID()?>">modifier</a>
+                          <a class="btn btn-default btn-danger btn-sm" href="index.php?admin=deletepost&amp;id=<?=$select->getID()?>">supprimer</a></div>
                 
-                
-                <form action="index.php?action=addcomment&amp;id=<?=$_GET['id']?>" method="POST" class="form-inline">
-                <div class="input-group col-lg-8">
-                  <input type="text" name="comment" id="comment" placeholder="commentaires" class="form-control" required>
-                  <span class="input-group-btn"><input class="btn btn-default" type="submit">envoyer</input></span>
-                </div>
-              </form>
               </div>
 
         </div> 
@@ -54,12 +49,14 @@
             <?php
             foreach ($postComments as $data) 
             {?>
-              <div class="list-group-item"><h5><em>le <?=htmlspecialchars($data->getDatecomment())?></em></h5><h5><?=htmlspecialchars($data->getComment())?><a href="index.php?action=report&amp;id=<?=$data->getID()?>" class="btn btn-danger btn-xs pull-right">signaler</a></h5></div>
+              <div class="list-group-item"><h5><em>le <?=htmlspecialchars($data->getDatecomment())?></em></h5><h5><?=htmlspecialchars($data->getComment())?><a href="index.php?admin=deletecomment&amp;id=<?=$data->getID()?>" class="btn btn-danger btn-xs pull-right">supprimer</a></h5></div>
             <?php }
             ?>
           </div>
         
-          
+          <div class="panel-footer">
+              
+          </div>
       </div>
     </div>
   </div>
@@ -101,14 +98,14 @@
                 foreach ($allposts as $other) 
                 { ?>
 
-                  <tr >
+                  <tr class="trmaxheight">
                     <td class="col-md-1">
                       <em>le <?=htmlspecialchars($other->getDatepost())?></em>
                     </td>
                     <td class="col-md-2">
                       <h4><?=htmlspecialchars($other->getTitle())?> </h4>
                     </td>
-                    <td class="col-md-8">
+                    <td class="col-md-9">
                       <div>
                       <?php
                         $txt= htmlspecialchars_decode(nl2br($other->getPost()));
@@ -116,17 +113,18 @@
                         $mot=array_keys($tab);
                         if(count($mot)>100)
                         {
-                        echo substr($txt,0,$mot[40]).'...';
+                        echo substr($txt,0,$mot[50]).'...';
                         }
                         else
                         {
                         echo $txt;
                         }
                       ?>
-                    </div>
+                      </div>
                     </td>
-                    <td class="col-md-2">
-                      <div class="btn-group"><a class="btn btn-primary btn-sm" href="index.php?action=post&amp;id=<?=$other->getID()?>">lire</a></div>
+                    <td class="col-md-1">
+                      <div class="btn-group-vertical"><a class="btn btn-primary btn-sm" href="index.php?admin=adminposts&amp;id=<?=$other->getID()?>">lire</a><a class="btn btn-primary btn-sm" href="index.php?admin=editpost&amp;id=<?=$other->getID()?>">modifier</a>
+                          <a class="btn btn-default btn-danger btn-sm" href="index.php?admin=deletepost&amp;id=<?=$other->getID()?>">supprimer</a></div>
                     </td>
                   </tr>
 
