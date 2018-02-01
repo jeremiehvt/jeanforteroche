@@ -13,7 +13,7 @@ class ViewController
 	*/
 	public function home($db)
 	{
-	   
+
 	    $PostManager = new \model\PostManager($db);
 	 	$lastpost = $PostManager->getLastPost();
 
